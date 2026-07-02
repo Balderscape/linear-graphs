@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 9 · BOSS LEVEL 🏆</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 9 of 9</p>
+    <h1>BOSS LEVEL 🏆</h1>
+    <p>Eight lessons of skills. Sixteen questions. No hints about which skill each one needs.
+    You’ve trained for exactly this.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>Everything, mixed together, exam-style. No new ideas today — because real mastery isn’t
+    doing one skill ten times in a row; it’s being ready for <em>any</em> question type without
+    being told which tool to reach for. That’s what tests (and life) actually throw at you.</p>
+    <p>Fair warning: mixed practice is <strong>deliberately harder</strong> than the single-topic
+    drills you’ve been smashing. <strong>If this feels like a workout, that’s the point</strong> —
+    the extra effort of deciding “which kind of question is this?” is exactly what turns
+    skills into instincts. 💪</p>
+  </div>
+
+  <div id="gauntlet"></div>
+
+  <div class="tip">🏅 <strong>Beat your best:</strong> jot down today’s Gauntlet score, then come
+  back <strong>tomorrow</strong> — and again <strong>next week</strong> — and try to beat it.
+  Coming back after a gap is what moves all this from “I knew it on Thursday” into long-term
+  memory. (Fresh questions every replay, so no memorising the answers. 😉)</div>
+
+  <div class="card" style="text-align:center;border:3px solid #f59e0b;background:linear-gradient(135deg,#fef3c7 0%,#fdf2f8 55%,#ede9fe 100%)">
+    <h2>🏆 Champion’s certificate</h2>
+    <div style="font-size:2.2rem;font-weight:800;letter-spacing:.08em;color:#7c3aed;margin:10px 0 2px">LINEAR&nbsp;LEGEND</div>
+    <div style="font-size:1.4rem;margin:2px 0 10px">🌟 y = mx + c 🌟</div>
+    <p style="font-size:1.05rem;max-width:34em;margin:0 auto"><strong>Amelia</strong> has conquered
+    gradients, intercepts, tables, disguises, weird lines and collisions.</p>
+    <p style="margin-top:12px">Any question type still feel shaky? Give its lesson a quick replay —
+    <a href="0001-meet-the-line.html">Meet the line</a> ·
+    <a href="0002-gradient-how-steep.html">Gradient</a> ·
+    <a href="0003-plotting-lines.html">Plotting</a> ·
+    <a href="0004-graph-to-equation.html">Graph → equation</a> ·
+    <a href="0005-table-to-equation.html">Table → equation</a> ·
+    <a href="0006-rearranging.html">Rearranging</a> ·
+    <a href="0007-weird-lines.html">Weird lines</a> ·
+    <a href="0008-where-lines-meet.html">Where lines meet</a> —
+    or start from the <a href="../index.html">course map</a>.</p>
+    <p><strong>Then go show this certificate to Dad. 😎</strong></p>
+  </div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>Ready for the real thing?
+    <a href="https://mathsgenie.co.uk/gcse/maths/edexcel/grade-5-5-15-equation-of-a-line" target="_blank">Maths Genie — Equation of a Line</a>
+    and <a href="https://mathsgenie.co.uk/gcse/maths/edexcel/grade-3-3-15-drawing-linear-graphs" target="_blank">Maths Genie — Drawing Linear Graphs</a>
+    have real exam-style questions with video solutions — the perfect next step after the Gauntlet.
+    And <a href="https://corbettmaths.com/2019/03/27/solving-simultaneous-equations-graphically/" target="_blank">Corbettmaths — Simultaneous Equations Graphically</a>
+    goes deeper on where-lines-meet.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — including
+    “make me a harder Gauntlet” or “why does mixed practice feel tougher but work better?”</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0008-where-lines-meet.html">← Lesson 8: Where lines meet</a>
+    <a href="../index.html">🏠 Course map — you finished!</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* ---------- shared helpers ---------- */
+const M = n => Quiz.fmtNum(n).replace(/-/g, '−');                 // pretty minus
+const rhs = (m, c) => Quiz.fmtLine(m, c).slice(4);                // '2x − 1' from 'y = 2x − 1'
+const coefX = k => (k === 1 ? 'x' : k === -1 ? '−x' : `${M(k)}x`);
+
+// '2 × (−3) − 1' style substitution string for y = m·x + c
+function mulStr(m, x, c) {
+  const xs = x < 0 ? `(${M(x)})` : M(x);
+  let s = `${M(m)} × ${xs}`;
+  if (c > 0) s += ` + ${M(c)}`;
+  else if (c < 0) s += ` − ${M(-c)}`;
+  return s;
+}
+
+// '(2, 3)' / '(2,3)' / ' ( 2 , 3 ) ' → {x, y}; anything else → null
+function parseCoord(s) {
+  const t = String(s).replace(/[()\s]/g, '').replace(/[−–—]/g, '-');
+  const parts = t.split(',');
+  if (parts.length !== 2 || parts[0] === '' || parts[1] === '') return null;
+  const x = Number(parts[0]), y = Number(parts[1]);
+  if (Number.isNaN(x) || Number.isNaN(y)) return null;
+  return { x, y };
+}
+
+// Random pair of lines with a guaranteed integer intersection (x0, y0).
+function crashPair() {
+  while (true) {
+    const x0 = Quiz.ri(-4, 4), y0 = Quiz.ri(-4, 4);
+    const m1 = Quiz.rnz(-3, 3);
+    let m2 = Quiz.rnz(-3, 3);
+    while (m2 === m1) m2 = Quiz.rnz(-3, 3);
+    const c1 = y0 - m1 * x0, c2 = y0 - m2 * x0;
+    if (Math.abs(c1) > 8 || Math.abs(c2) > 8) continue;
+    return { x0, y0, m1, c1, m2, c2 };
+  }
+}
+
+function solveExplain(p) {
+  const dm = p.m1 - p.m2, dc = p.c2 - p.c1;
+  const gather = dm === 1
+    ? `<span class="eq">x = ${M(p.x0)}</span>`
+    : `<span class="eq">${coefX(dm)} = ${M(dc)}</span>, so x = ${M(p.x0)}`;
+  return `Set the two right-hand sides equal: <span class="eq">${rhs(p.m1, p.c1)} = ${rhs(p.m2, p.c2)}</span>. ` +
+    `Gather the x’s on one side: ${gather}. ` +
+    `Substitute back into either line: y = ${mulStr(p.m1, p.x0, p.c1)} = ${M(p.y0)}. ` +
+    `Crash site: (${M(p.x0)}, ${M(p.y0)}).`;
+}
+
+/* ---------- the eight question generators ---------- */
+
+/* 1 · spot m or c in an equation (with the written-backwards trap) */
+function qSpot() {
+  const m = Quiz.rnz(-6, 6), c = Quiz.rnz(-9, 9);
+  const flip = Math.random() < 0.35;                 // sometimes y = 7 − 2x
+  const eq = flip
+    ? `y = ${M(c)} ${m < 0 ? '−' : '+'} ${Math.abs(m) === 1 ? '' : Math.abs(m)}x`
+    : Quiz.fmtLine(m, c);
+  const askM = Math.random() < 0.5;
+  const right = askM ? m : c;
+  const wrongs = new Set();
+  for (const w of [askM ? c : m, -right, right + 1, right - 1]) {
+    if (w !== right) wrongs.add(w);
+    if (wrongs.size === 3) break;
+  }
+  return {
+    prompt: `What is the <strong>${askM ? 'gradient <span class="m-color">m</span>' : 'y-intercept <span class="c-color">c</span>'}</strong> of
+             <span class="eq">${eq}</span>?`,
+    choices: [{ html: M(right), correct: true }, ...[...wrongs].map(w => ({ html: M(w) }))],
+    explain: askM
+      ? `The gradient is whatever multiplies x — here that’s ${M(m)}${flip ? ', even though it’s written second' : ''}.`
+      : `The y-intercept is the lone number with no x attached — here that’s ${M(c)}${flip ? ', even though it’s written first' : ''}.`,
+  };
+}
+
+/* 2 · read the gradient off a drawn line with a rise/run triangle */
+function qRise() {
+  const m = Quiz.rnz(-3, 3), c = Quiz.ri(-3, 3), dx = Quiz.pick([1, 2]);
+  const rise = m * dx;
+  const wrongs = new Set();
+  for (const w of [-m, rise, m + 1, m - 1]) {
+    if (w !== m) wrongs.add(w);
+    if (wrongs.size === 3) break;
+  }
+  return {
+    prompt(el) {
+      el.innerHTML = 'Use the amber triangle: what is the <strong>gradient</strong> of this line?';
+      const gg = Graph.create(el, { width: 300, height: 300 });
+      gg.line(m, c, { color: '#7c3aed', width: 4 });
+      gg.riseRun(-1, dx, m, c);
+    },
+    choices: [{ html: M(m), correct: true }, ...[...wrongs].map(w => ({ html: M(w) }))],
+    explain: `The triangle goes across ${dx} and ${rise >= 0 ? 'up' : 'down'} ${Math.abs(rise)} → ` +
+      `gradient = ${rise < 0 ? '−' : ''}${Math.abs(rise)} ÷ ${dx} = ${M(m)}. Rise over run, sign from the tilt.`,
+  };
+}
+
+/* 3 · which point is on the line? */
+function qPointOn() {
+  let m, c, x1, y1;
+  do {
+    m = Quiz.rnz(-3, 3); c = Quiz.ri(-5, 5); x1 = Quiz.rnz(-4, 4); y1 = m * x1 + c;
+  } while (Math.abs(y1) > 9);
+  const pt = (x, y) => `(${M(x)}, ${M(y)})`;
+  const wrongs = Quiz.shuffle([[x1, y1 + 1], [x1, y1 - 1], [x1 + 1, y1], [x1 - 1, y1]]).slice(0, 3);
+  return {
+    prompt: `Which of these points is <strong>on</strong> the line <span class="eq">${Quiz.fmtLine(m, c)}</span>?`,
+    choices: [{ html: pt(x1, y1), correct: true }, ...wrongs.map(([wx, wy]) => ({ html: pt(wx, wy) }))],
+    explain: `Feed in x = ${M(x1)}: y = ${mulStr(m, x1, c)} = ${M(y1)}. ` +
+      `So ${pt(x1, y1)} obeys the rule — none of the others do.`,
+  };
+}
+
+/* 4 · graph → equation, typed, no triangle */
+function qGraphEq() {
+  const m = Quiz.pick([-3, -2, -1, 1, 2, 3, -0.5, 0.5]);
+  const c = Quiz.ri(-5, 5);
+  return {
+    prompt(el) {
+      el.innerHTML = 'What’s the equation of this line?';
+      const gg = Graph.create(el, { width: 300, height: 300 });
+      gg.line(m, c, { color: '#7c3aed', width: 4 });
+      gg.point(0, c, { color: '#0d9488' });
+    },
+    input: { placeholder: 'y = …', check: s => Quiz.checkLine(s, { m, c }), answer: Quiz.fmtLine(m, c) },
+    explain: `The teal dot: it crosses the y-axis at ${M(c)}, so c = ${M(c)}. ` + (Number.isInteger(m)
+      ? `From any grid point on the line: across 1, ${m > 0 ? 'up' : 'down'} ${Math.abs(m)} → m = ${M(m)}.`
+      : `It’s a gentle one: across 2, ${m > 0 ? 'up' : 'down'} 1 → m = ${M(m)}.`),
+  };
+}
+
+/* 5 · table of values → equation, typed (c needs a step back) */
+function qTable() {
+  const m = Quiz.rnz(-3, 3), c = Quiz.ri(-5, 5);
+  const xs = [1, 2, 3, 4, 5];
+  const row = f => xs.map(x => `<td>${f(x)}</td>`).join('');
+  return {
+    prompt: `This table follows a straight-line rule. What’s its equation?
+      <table class="vals"><tr><th>x</th>${row(x => x)}</tr><tr><th>y</th>${row(x => M(m * x + c))}</tr></table>`,
+    input: { placeholder: 'y = …', check: s => Quiz.checkLine(s, { m, c }), answer: Quiz.fmtLine(m, c) },
+    explain: `Each step of 1 in x changes y by ${M(m)} → m = ${M(m)}. ` +
+      `The table starts at x = 1 (y = ${M(m + c)}), so step <em>back</em> once to x = 0: ` +
+      `${M(m + c)} ${m > 0 ? '−' : '+'} ${Math.abs(m)} = ${M(c)} → c = ${M(c)}.`,
+  };
+}
+
+/* 6 · rearrange a disguised equation into y = mx + c form */
+function qRearrange() {
+  const kind = Quiz.ri(0, 2);
+  let disguised, m, c, wrongs, how;
+  if (kind === 0) {                                   // 2y = 2m·x + 2c
+    m = Quiz.rnz(-4, 4); c = Quiz.rnz(-6, 6);
+    disguised = `2y = ${M(2 * m)}x ${c > 0 ? '+' : '−'} ${Math.abs(2 * c)}`;
+    wrongs = [[2 * m, 2 * c], [2 * m, c], [m, 2 * c]];
+    how = `Divide EVERY term by 2 (both sides): y = ${rhs(m, c)}. Halving only some terms is the classic trap.`;
+  } else {                                            // y + ax = c   or   ax + y = c
+    const a = Quiz.rnz(-4, 4);
+    c = Quiz.rnz(-6, 6); m = -a;
+    disguised = kind === 1
+      ? `y ${a > 0 ? '+' : '−'} ${Math.abs(a) === 1 ? '' : Math.abs(a)}x = ${M(c)}`
+      : `${a === 1 ? '' : a === -1 ? '−' : M(a)}x + y = ${M(c)}`;
+    wrongs = [[a, c], [-a, -c], [a, -c]];
+    how = `Move the x-term to the other side — it flips sign: y = ${rhs(m, c)}. Only the x-term moves; c stays put.`;
+  }
+  const correct = Quiz.fmtLine(m, c);
+  const seen = new Set([correct]);
+  const choices = [{ html: `<span class="eq">${correct}</span>`, correct: true }];
+  for (const [wm, wc] of wrongs) {
+    const k = Quiz.fmtLine(wm, wc);
+    if (!seen.has(k)) { seen.add(k); choices.push({ html: `<span class="eq">${k}</span>` }); }
+  }
+  return {
+    prompt: `This line is wearing a disguise: <span class="eq">${disguised}</span>.
+             Which is its true <span class="eq">y = mx + c</span> form?`,
+    choices,
+    explain: how,
+  };
+}
+
+/* 7 · weird lines: horizontal / vertical, typed (including the axes) */
+function qWeird() {
+  const vertical = Math.random() < 0.5;
+  const k = Quiz.ri(-6, 6);
+  return {
+    prompt(el) {
+      el.innerHTML = 'What’s the equation of this line?';
+      const gg = Graph.create(el, { width: 300, height: 300 });
+      if (vertical) gg.vline(k, { color: '#ec4899', width: 4 });
+      else gg.hline(k, { color: '#0d9488', width: 4 });
+    },
+    input: {
+      placeholder: 'y = …  or  x = …',
+      check: s => Quiz.checkLine(s, vertical ? { type: 'vline', x: k } : { m: 0, c: k }),
+      answer: vertical ? `x = ${M(k)}` : `y = ${M(k)}`,
+    },
+    explain: vertical
+      ? `Every point on it has x = ${M(k)} (y can be anything) → <span class="eq">x = ${M(k)}</span>.${k === 0 ? ' Sneaky — that’s the y-axis itself!' : ''}`
+      : `Every point on it sits at height ${M(k)} whatever x is → <span class="eq">y = ${M(k)}</span>.${k === 0 ? ' Sneaky — that’s the x-axis itself!' : ''}`,
+  };
+}
+
+/* 8 · intersection of two given equations, typed as (x, y) */
+function qIntersect() {
+  const p = crashPair();
+  return {
+    prompt: `Where do these two lines cross? Type the point like <span class="eq">(2, 3)</span>.
+      <div class="eq-big">${Quiz.fmtLine(p.m1, p.c1)} &nbsp;&nbsp;and&nbsp;&nbsp; ${Quiz.fmtLine(p.m2, p.c2)}</div>`,
+    input: {
+      placeholder: '(x, y)',
+      check: s => { const q = parseCoord(s); return !!q && Quiz.approx(q.x, p.x0) && Quiz.approx(q.y, p.y0); },
+      answer: `(${M(p.x0)}, ${M(p.y0)})`,
+    },
+    explain: solveExplain(p),
+  };
+}
+
+/* ---------- THE GAUNTLET ---------- */
+const GENS = [qSpot, qRise, qPointOn, qGraphEq, qTable, qRearrange, qWeird, qIntersect];
+
+Quiz.create('gauntlet', {
+  title: 'THE GAUNTLET 👹',
+  intro: '16 questions. Every skill from the course, dealt in random order — just like an exam paper. ' +
+    'Fresh questions on every replay. Trust your training. 💪',
+  rounds: 16,
+  generate: () => Quiz.pick(GENS)(),
+});
+</script>
+</body>
+</html>

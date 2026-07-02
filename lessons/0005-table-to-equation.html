@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5 · Secret Patterns: Table → Equation 🧩</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 5 of 9</p>
+    <h1>Secret Patterns: Table → Equation 🧩</h1>
+    <p>No graph this time — just a table of numbers hiding an equation. You’re going to learn its two secrets.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>Given a table of x and y values, you’ll <strong>find the equation that made it</strong>. Every linear table
+    gives itself away twice:</p>
+    <ul>
+      <li><strong>Secret 1 — the STEP.</strong> How much y changes each time x goes up by 1 — that’s
+      <span class="eq"><span class="m-color">m</span></span>.</li>
+      <li><strong>Secret 2 — the start.</strong> The value of y when <span class="eq">x = 0</span> — that’s
+      <span class="eq"><span class="c-color">c</span></span>. Read it straight off if it’s there, or step backwards to reach it.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🧩 Worked example: the pattern confesses</h2>
+    <p>Here’s a table. Watch how quickly it cracks.</p>
+    <table class="vals">
+      <tr><th>x</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>y</th>
+        <td><span style="display:inline-block;border:2.5px solid #0d9488;border-radius:999px;padding:1px 9px;color:#0d9488;font-weight:700">1</span></td>
+        <td>4</td><td>7</td><td>10</td><td>13</td></tr>
+      <tr><th style="font-weight:400;font-size:.8rem">step</th>
+        <td style="border-style:dashed"></td>
+        <td style="color:#ec4899;font-size:.85rem;font-weight:700;border-style:dashed">+3</td>
+        <td style="color:#ec4899;font-size:.85rem;font-weight:700;border-style:dashed">+3</td>
+        <td style="color:#ec4899;font-size:.85rem;font-weight:700;border-style:dashed">+3</td>
+        <td style="color:#ec4899;font-size:.85rem;font-weight:700;border-style:dashed">+3</td></tr>
+    </table>
+    <p><strong>Secret 1:</strong> every time x goes up by 1, y jumps by <span class="m-color"><strong>+3</strong></span>.
+    A steady step means a straight line — and the step <em>is</em> the gradient:
+    <span class="eq"><span class="m-color">m = 3</span></span>.</p>
+    <p><strong>Secret 2:</strong> the circled value — y when <span class="eq">x = 0</span> — is sitting right there:
+    <span class="eq"><span class="c-color">c = 1</span></span>.</p>
+    <div class="eq-big">y = <span class="m-color">3</span>x <span class="c-color">+ 1</span></div>
+  </div>
+
+  <div class="card">
+    <h2>🚶‍♀️ But what if the table doesn’t start at 0?</h2>
+    <p>Sneaky tables hide the <span class="eq">x = 0</span> column. No problem — you just <strong>step backwards</strong>.</p>
+    <table class="vals">
+      <tr><th>x</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><th>y</th><td>5</td><td>7</td><td>9</td><td>11</td><td>13</td></tr>
+    </table>
+    <p><strong>Secret 1:</strong> the step is <span class="m-color"><strong>+2</strong></span> every time, so
+    <span class="eq"><span class="m-color">m = 2</span></span>.</p>
+    <p><strong>Secret 2:</strong> the table starts at <span class="eq">(1, 5)</span> — but you need y at
+    <span class="eq">x = 0</span>. Step <em>back</em> one column: undo one step of +2, so
+    y = 5 − 2 = <strong>3</strong>. That’s <span class="eq"><span class="c-color">c = 3</span></span>.</p>
+    <div class="eq-big">y = <span class="m-color">2</span>x <span class="c-color">+ 3</span></div>
+    <p><strong>Now check it</strong> against a different row: does <span class="eq">2 × 4 + 3 = 11</span>?
+    Yes ✓ — matches the table. Equation confirmed.</p>
+    <div class="tip">💡 <strong>Detective habit:</strong> always test your equation on one more row of the table.
+    Ten seconds, and it catches nearly every slip.</div>
+  </div>
+
+  <div class="card">
+    <h2>🔮 Pattern machine</h2>
+    <p>Deal yourself a mystery table. Work out the equation in your head (step first, then the x = 0 value),
+    <em>then</em> reveal the secret.</p>
+    <p>
+      <button class="btn" id="dealBtn">Deal me a table 🎲</button>
+      <button class="btn secondary" id="revealBtn" disabled>Reveal the secret 💡</button>
+    </p>
+    <div id="patternTable"></div>
+    <p class="eq-big" id="patternEq"></p>
+    <div class="tip"><strong>Try these missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Get <strong>3 tables in a row</strong> right before revealing.</li>
+        <li>Catch one with a <strong>negative step</strong> — say “m is negative” before anything else.</li>
+        <li>Time yourself: can you crack a table in under <strong>15 seconds</strong>?</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> these tables all show the x = 0 column, so c is a freebie —
+    spot the step and you’re done. The drills below will take the stabilisers off.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Drill 1 hands you the freebie column. Drill 2 hides it — step back like a pro.
+    Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>The king of five-minute maths videos:
+    <a href="https://corbettmaths.com/?s=equation+of+a+line" target="_blank">Corbettmaths — “equation of a line”</a>
+    (the videos <em>Equation of a Line</em> and <em>Finding the Equation of a Straight Line</em> plus textbook
+    exercises with answers). For extra practice with instant feedback, try the
+    <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank">
+    Khan Academy linear equations &amp; graphs unit</a> (remember: their <span class="eq">b</span> is our
+    <span class="eq">c</span>).</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — “what would the table look like if
+    the pattern <em>wasn’t</em> a straight line?” is a brilliant question, for instance.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0004-graph-to-equation.html">← Lesson 4: Graph → equation</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0006-rearranging.html">Lesson 6: Rearranging →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* pretty minus for displayed numbers; brackets around negatives in working */
+const neat = n => Quiz.fmtNum(n).replace('-', '−');
+const brk = n => n < 0 ? `(${neat(n)})` : neat(n);
+const signedStep = m => (m > 0 ? '+' : '−') + Math.abs(m);
+
+/* build a table.vals for y = mx + c over 5 x-values starting at x0.
+   revealed adds the step row and circles the x = 0 value if present. */
+function tableHTML(m, c, x0, revealed) {
+  const xs = [0, 1, 2, 3, 4].map(i => x0 + i);
+  const circle = v =>
+    `<span style="display:inline-block;border:2.5px solid #0d9488;border-radius:999px;padding:1px 9px;color:#0d9488;font-weight:700">${v}</span>`;
+  const xRow = `<tr><th>x</th>${xs.map(x => `<td>${x}</td>`).join('')}</tr>`;
+  const yRow = `<tr><th>y</th>${xs.map(x => {
+    const y = m * x + c;
+    return `<td>${revealed && x === 0 ? circle(y) : y}</td>`;
+  }).join('')}</tr>`;
+  const stepRow = revealed
+    ? `<tr><th style="font-weight:400;font-size:.8rem">step</th><td style="border-style:dashed"></td>` +
+      xs.slice(1).map(() =>
+        `<td style="color:#ec4899;font-size:.85rem;font-weight:700;border-style:dashed">${signedStep(m)}</td>`).join('') +
+      `</tr>`
+    : '';
+  return `<table class="vals">${xRow}${yRow}${stepRow}</table>`;
+}
+
+/* ---------- pattern machine ---------- */
+const dealBtn = document.getElementById('dealBtn');
+const revealBtn = document.getElementById('revealBtn');
+const patternTable = document.getElementById('patternTable');
+const patternEq = document.getElementById('patternEq');
+let pm = null, pc = null;
+
+dealBtn.addEventListener('click', () => {
+  pm = Quiz.rnz(-3, 3);
+  pc = Quiz.ri(-5, 5);
+  patternTable.innerHTML = tableHTML(pm, pc, 0, false);
+  patternEq.textContent = '🤫 crack it in your head first…';
+  revealBtn.disabled = false;
+});
+
+revealBtn.addEventListener('click', () => {
+  if (pm === null) return;
+  patternTable.innerHTML = tableHTML(pm, pc, 0, true);
+  patternEq.innerHTML = `<span class="eq">${Quiz.fmtLine(pm, pc)}</span> — did you get it? 💜`;
+  revealBtn.disabled = true;
+});
+
+/* ---------- drill 1: x starts at 0, c is a freebie ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Tables with a freebie 🎁',
+  intro: 'Every table here shows x = 0, so <span class="c-color"><strong>c</strong></span> is sitting right there. Find the step for <span class="m-color"><strong>m</strong></span> and type the equation.',
+  rounds: 8,
+  generate() {
+    const m = Quiz.rnz(-4, 4), c = Quiz.ri(-6, 6);
+    return {
+      prompt(el) {
+        el.innerHTML = 'What equation made this table?' + tableHTML(m, c, 0, false);
+      },
+      input: { placeholder: 'y = …',
+               check: s => Quiz.checkLine(s, { m, c }),
+               answer: Quiz.fmtLine(m, c) },
+      explain: `Each time x goes up by 1, y ${m > 0 ? 'goes up' : 'goes down'} by ${Math.abs(m)} — ` +
+        `that step is the gradient, so m = ${neat(m)}. ` +
+        `And the freebie: at x = 0, y = ${neat(c)}, so c = ${neat(c)}. ` +
+        `Equation: <span class="eq">${Quiz.fmtLine(m, c)}</span>.`,
+    };
+  },
+});
+
+/* ---------- drill 2: no x = 0 column — step back ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · No freebie — step back! 🚶‍♀️',
+  intro: 'These tables hide the x = 0 column. Find the step, then walk backwards to x = 0 to find <span class="c-color"><strong>c</strong></span>. Don’t forget to check a row!',
+  rounds: 8,
+  generate() {
+    const m = Quiz.rnz(-4, 4), c = Quiz.ri(-6, 6);
+    const x0 = Quiz.pick([1, 2]);
+    const y0 = m * x0 + c;
+    return {
+      prompt(el) {
+        el.innerHTML = 'What equation made this table?' + tableHTML(m, c, x0, false);
+      },
+      input: { placeholder: 'y = …',
+               check: s => Quiz.checkLine(s, { m, c }),
+               answer: Quiz.fmtLine(m, c) },
+      explain: `The step is ${signedStep(m)} each time, so m = ${neat(m)}. ` +
+        `No x = 0 column, so use c = y − m × x on the first entry (${x0}, ${neat(y0)}): ` +
+        `c = ${brk(y0)} − ${brk(m)} × ${x0} = ${brk(y0)} − ${brk(m * x0)} = ${neat(c)}. ` +
+        `Equation: <span class="eq">${Quiz.fmtLine(m, c)}</span>.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

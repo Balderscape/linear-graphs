@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4 · Detective Mode: Graph → Equation 🕵️‍♀️</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 4 of 9</p>
+    <h1>Detective Mode: Graph → Equation 🕵️‍♀️</h1>
+    <p>Someone drew a line and hid the equation. You’re about to learn how to unmask it — every single time.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>So far you’ve gone equation → line. Today you go the other way: <strong>look at a drawn line and write its
+    equation</strong>. Two clues crack every case:</p>
+    <ul>
+      <li><strong>Clue 1</strong> — where the line crosses the <em>y-axis</em> gives you <span class="eq"><span class="c-color">c</span></span>.</li>
+      <li><strong>Clue 2</strong> — rise over run (how far <em>up</em> for each step <em>across</em>) gives you <span class="eq"><span class="m-color">m</span></span>.</li>
+    </ul>
+    <p>Then you write <span class="eq">y = <span class="m-color">m</span>x + <span class="c-color">c</span></span>. Case closed. 🔎</p>
+  </div>
+
+  <div class="card">
+    <h2>🗂️ Case file #1: the mystery line</h2>
+    <p>Here’s a line with no equation attached. Let’s work it like a detective.</p>
+    <div id="case1Graph"></div>
+    <p><strong>Clue 1 — the crossing point.</strong> The line cuts the <em>y-axis</em> at the teal dot,
+    <span class="eq">(0, −3)</span>. That number is <span class="c-color"><strong>c</strong></span>, no working needed:
+    <span class="eq"><span class="c-color">c = −3</span></span>.</p>
+    <p><strong>Clue 2 — rise over run.</strong> Pick any point on the line and walk the amber staircase:
+    <strong>across 1, up 2</strong>. Gradient = rise ÷ run = 2 ÷ 1, so
+    <span class="eq"><span class="m-color">m = 2</span></span>.</p>
+    <p>Now assemble the evidence:</p>
+    <div class="eq-big">y = <span class="m-color">2</span>x <span class="c-color">− 3</span></div>
+    <p>That’s the whole method. Two clues, one equation. 🕵️‍♀️</p>
+  </div>
+
+  <div class="card">
+    <h2>🗂️ Case file #2: the downhill suspect</h2>
+    <p>One more, because downhill lines love to trick people.</p>
+    <div id="case2Graph"></div>
+    <p>Clue 1: the teal dot is at <span class="eq">(0, 2)</span>, so <span class="eq"><span class="c-color">c = 2</span></span>.
+    Clue 2: across 1, the line goes <strong>down</strong> 1 — and <strong>downhill means m is negative</strong>:
+    <span class="eq"><span class="m-color">m = −1</span></span>.</p>
+    <div class="eq-big">y = <span class="m-color">−</span>x <span class="c-color">+ 2</span></div>
+    <p>The only trap in this whole topic is forgetting that minus sign. Check the tilt <em>first</em>, every time:
+    uphill ⇒ positive, downhill ⇒ negative. ⛷️</p>
+  </div>
+
+  <div class="card">
+    <h2>🔍 Guess then check</h2>
+    <p>Warm those detective muscles. Press the button, and a mystery line appears.
+    <strong>Say its equation out loud</strong> (yes, actually out loud — it works!) before you press reveal.</p>
+    <p>
+      <button class="btn" id="warmNew">Show me a line</button>
+      <button class="btn secondary" id="warmReveal" disabled>Reveal equation 💡</button>
+    </p>
+    <div id="warmGraph"></div>
+    <p class="eq-big" id="warmEq"></p>
+    <div class="tip"><strong>Try these missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Get <strong>3 in a row</strong> right before revealing.</li>
+        <li>Before each reveal, say which clue you found first — the dot or the tilt.</li>
+        <li>Catch a <strong>downhill</strong> line and nail its negative m.</li>
+        <li>Try naming c with your eyes only on the y-axis — ignore the rest of the line.</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> if you can name c before the reveal every time, you’re already
+    halfway to a full equation. The gradient is just one staircase away.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills. The first gives you both clues on a plate; the finals make you count the squares yourself.
+    Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>For a solid GCSE-style walkthrough with exam questions and video solutions:
+    <a href="https://mathsgenie.co.uk/gcse/maths/edexcel/grade-5-5-15-equation-of-a-line" target="_blank">Maths Genie — Equation of a Line</a>.
+    And <a href="https://corbettmaths.com/2013/05/15/gradient-of-a-line/" target="_blank">Corbettmaths — Gradient of a Line</a>
+    is the perfect 5-minute video if the rise ÷ run counting still feels wobbly.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — “what if the line crosses the y-axis
+    between two grid lines?” is a cracking question, for instance.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0003-plotting-lines.html">← Lesson 3: Plotting lines</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0005-table-to-equation.html">Lesson 5: Table → equation →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* pretty minus for displayed numbers */
+const neat = n => Quiz.fmtNum(n).replace('-', '−');
+/* pick a rise/run start point that keeps the triangle on the grid */
+const triX0 = (m, c) => Math.max(-6, Math.min(5, Math.round(-c / m)));
+
+/* ---------- case file 1: y = 2x − 3 ---------- */
+const g1 = Graph.create('case1Graph', { width: 360, height: 360 });
+g1.line(2, -3, { color: '#7c3aed', width: 4, label: 'y = 2x − 3' });
+g1.point(0, -3, { color: '#0d9488', label: 'c = −3' });
+g1.riseRun(1, 1, 2, -3);
+
+/* ---------- case file 2: y = −x + 2 ---------- */
+const g2 = Graph.create('case2Graph', { width: 360, height: 360 });
+g2.line(-1, 2, { color: '#7c3aed', width: 4, label: 'y = −x + 2' });
+g2.point(0, 2, { color: '#0d9488', label: 'c = 2' });
+g2.riseRun(1, 1, -1, 2);
+
+/* ---------- warm-up: guess then check ---------- */
+const wg = Graph.create('warmGraph', { width: 420, height: 420 });
+const warmNew = document.getElementById('warmNew');
+const warmReveal = document.getElementById('warmReveal');
+const warmEq = document.getElementById('warmEq');
+let wm = null, wc = null;
+
+warmNew.addEventListener('click', () => {
+  wm = Quiz.pick([-2, -1, 1, 2]);
+  wc = Quiz.ri(-4, 4);
+  wg.clear();
+  wg.line(wm, wc, { color: '#7c3aed', width: 4 });
+  warmEq.textContent = '🤫 say it out loud first…';
+  warmReveal.disabled = false;
+});
+
+warmReveal.addEventListener('click', () => {
+  if (wm === null) return;
+  wg.clear();
+  wg.line(wm, wc, { color: '#7c3aed', width: 4, label: Quiz.fmtLine(wm, wc) });
+  wg.point(0, wc, { color: '#0d9488', label: 'c = ' + neat(wc) });
+  wg.riseRun(triX0(wm, wc), 1, wm, wc);
+  warmEq.innerHTML = `<span class="eq">${Quiz.fmtLine(wm, wc)}</span> — did you get it? 💜`;
+  warmReveal.disabled = true;
+});
+
+/* ---------- drill 1: both clues supplied ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Crack the easy cases 🔓',
+  intro: 'Both clues are drawn for you: the teal dot gives <span class="c-color"><strong>c</strong></span>, the amber triangle gives <span class="m-color"><strong>m</strong></span>. Type the full equation.',
+  rounds: 8,
+  generate() {
+    const m = Quiz.rnz(-3, 3), c = Quiz.ri(-5, 5);
+    return {
+      prompt(el) {
+        el.innerHTML = 'What is the equation of this line?';
+        const g = Graph.create(el, { width: 320, height: 320 });
+        g.line(m, c, { color: '#7c3aed', width: 4 });
+        g.point(0, c, { color: '#0d9488' });
+        g.riseRun(triX0(m, c), 1, m, c);
+      },
+      input: { placeholder: 'y = …',
+               check: s => Quiz.checkLine(s, { m, c }),
+               answer: Quiz.fmtLine(m, c) },
+      explain: `Clue 1: the line crosses the y-axis at the teal dot, so c = ${neat(c)}. ` +
+        `Clue 2: the triangle goes across 1 and ${m > 0 ? 'up' : 'down'} ${Math.abs(m)}, so m = ${neat(m)}. ` +
+        `Put together: <span class="eq">${Quiz.fmtLine(m, c)}</span>.`,
+    };
+  },
+});
+
+/* ---------- drill 2: no triangle — count squares yourself ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Detective finals 🏅',
+  intro: 'No triangle this time — you count the squares. Watch out: some gradients are gentle, like ½. If across 1 doesn’t land on a corner, try across 2.',
+  rounds: 8,
+  generate() {
+    const m = Quiz.pick([-3, -2, -1, -0.5, 0.5, 1, 2, 3]);
+    const c = Quiz.ri(-5, 5);
+    const dx = Number.isInteger(m) ? 1 : 2;
+    const rise = m * dx;
+    const mWork = dx === 1
+      ? `m = ${neat(m)}`
+      : `m = rise ÷ run = ${neat(rise)} ÷ ${dx} = ${neat(m)}`;
+    return {
+      prompt(el) {
+        el.innerHTML = 'What is the equation of this line?';
+        const g = Graph.create(el, { width: 320, height: 320 });
+        g.line(m, c, { color: '#7c3aed', width: 4 });
+        g.point(0, c, { color: '#0d9488' });
+      },
+      input: { placeholder: 'y = …',
+               check: s => Quiz.checkLine(s, { m, c }),
+               answer: Quiz.fmtLine(m, c) },
+      explain: `Clue 1: the teal dot sits at (0, ${neat(c)}), so c = ${neat(c)}. ` +
+        `Clue 2: from any corner point on the line, go across ${dx} — the line goes ` +
+        `${rise > 0 ? 'up' : 'down'} ${Math.abs(rise)}. Rise over run: ${mWork}. ` +
+        `So the equation is <span class="eq">${Quiz.fmtLine(m, c)}</span>.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 7 · The Weird Ones: y = k and x = k 👻</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 7 of 9</p>
+    <h1>The Weird Ones: y&nbsp;=&nbsp;k and x&nbsp;=&nbsp;k 👻</h1>
+    <p>Two lines with one-letter equations, no visible x <em>and</em> y, and a talent for tripping up an entire classroom. Time to make them boring.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>You’ll handle the edge cases everyone trips on: <span class="eq">y = 3</span> is a <strong>horizontal</strong> line
+    (a floor), <span class="eq">x = 3</span> is a <strong>vertical</strong> line (a wall) — and you’ll see why one of them
+    fits <span class="eq">y = mx + c</span> perfectly while the other <em>can’t be written that way at all</em>.
+    Plus two mind-benders: the axes themselves are lines with equations. 🤯</p>
+  </div>
+
+  <div class="card">
+    <h2>Flat lines: y = k 🛏️</h2>
+    <p>The equation <span class="eq">y = 3</span> says one thing only: <strong>“the y-coordinate is 3.”</strong>
+    It doesn’t mention x, which means x can be <em>anything it likes</em>. So the points
+    (−4,&nbsp;3), (0,&nbsp;3), (5,&nbsp;3)… all qualify — and together they make a horizontal line, 3 above the x-axis.</p>
+    <div id="flatGraph"></div>
+    <p>And here’s the nice part: <span class="eq">y = 3</span> still fits <span class="eq">y = mx + c</span> —
+    it’s just <span class="eq">y = 0x + 3</span> in casual clothes. Gradient
+    <span class="m-color"><strong>m = 0</strong></span> (perfectly flat), intercept
+    <span class="c-color"><strong>c = 3</strong></span>. A flat line is a completely ordinary member of the family.</p>
+  </div>
+
+  <div class="card">
+    <h2>Walls: x = k 🧱</h2>
+    <p><span class="eq">x = 4</span> says <strong>“the x-coordinate is 4”</strong> — and y can be anything.
+    (4,&nbsp;−5), (4,&nbsp;0), (4,&nbsp;7)… stack them up and you get a <strong>vertical</strong> line: a wall standing at 4 on the x-axis.</p>
+    <div id="wallGraph"></div>
+    <p>But this one is the true outsider: a vertical line <strong>cannot</strong> be written as
+    <span class="eq">y = mx + c</span>. There is no m. Its gradient is <strong>undefined</strong> — “infinitely steep”.</p>
+    <div class="tip">🧗 <strong>Why no gradient?</strong> Gradient is rise ÷ run — “up how much for each step across?”
+    Walking up a wall, you go <em>up any amount</em> while going <em>across zero</em>.
+    That’s rise ÷ 0, and dividing by zero is maths’ one forbidden move. So: no m, no
+    <span class="eq">y = mx + c</span>, gradient <strong>undefined</strong> (not 0 — that’s the flat one!).</div>
+  </div>
+
+  <div class="card">
+    <h2>🤯 Plot twist: the axes are lines too</h2>
+    <p>Ready for the mind-bender? The axes you’ve been drawing on all this time <strong>are themselves lines with equations</strong>:</p>
+    <ul>
+      <li>The <strong>x-axis</strong> is the line <span class="eq">y = 0</span> — every point on it has y-coordinate 0.</li>
+      <li>The <strong>y-axis</strong> is the line <span class="eq">x = 0</span> — every point on it has x-coordinate 0.</li>
+    </ul>
+    <div id="axesGraph"></div>
+    <p>Yes, that feels backwards — the <em>x</em>-axis has a <em>y</em> equation. But say it out loud:
+    “along the x-axis, the height y is always 0” — and suddenly it’s obvious. This one turns up in exams
+    precisely <em>because</em> it feels backwards. Now it’s your free mark. 😎</p>
+  </div>
+
+  <div class="card">
+    <h2>Never mix them up again 🧠</h2>
+    <div class="tip">🧠 <strong>Memory trick for the classic mix-up:</strong>
+    <span class="eq">y = 3</span> crosses the <strong>y-axis</strong> at 3 (and is flat).
+    <span class="eq">x = 3</span> crosses the <strong>x-axis</strong> at 3 (and is a wall).
+    <strong>The letter in the equation tells you which coordinate is locked</strong> — and the line crosses
+    <em>that letter’s axis</em> at k.</div>
+  </div>
+
+  <div class="card">
+    <h2>👻 Wall or floor?</h2>
+    <p>Slide k, then flip between the two equation types. Watch the three sample points:
+    one coordinate is <strong>locked</strong>, the other roams free.</p>
+    <p style="text-align:center">
+      <button class="btn" id="btnY">y = k &nbsp;(floor)</button>
+      <button class="btn secondary" id="btnX">x = k &nbsp;(wall)</button>
+    </p>
+    <div id="wfSlider"></div>
+    <p class="eq-big" id="wfEq"></p>
+    <div id="wfGraph"></div>
+    <div class="tip"><strong>Try these missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Set k = 3 and flip between <strong>y = 3</strong> and <strong>x = 3</strong> a few times. Floor… wall… floor… feel the difference.</li>
+        <li>Slide k to <strong>0</strong> in each mode. Which famous lines do you land on? 🤯</li>
+        <li>In y = k mode, read the sample points: which coordinate never changes as you slide?</li>
+        <li>Make the wall stand at <strong>−4</strong>, then make the floor sit at <strong>−4</strong>. Say each equation before you flip.</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> if you can flip that toggle and predict the line before it draws,
+    you have already beaten the most-dropped mark on this whole topic. The letter locks the coordinate — that’s the entire trick.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills: name the weird lines from their graphs, then out-think the classic trick questions. Fresh questions every replay — go for 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>The perfect short video pair for this:
+    <a href="https://corbettmaths.com/2013/05/29/y-equals-graphs/" target="_blank">Corbettmaths — y = graphs (horizontal lines)</a>,
+    which links straight on to its companion video on x = graphs (vertical lines). And for the fastest “oh, I get it” of your life, open
+    <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>, type <code>x = 3</code> and
+    <code>y = 3</code>, and stare at the difference.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — “why is the gradient of a wall
+    <em>undefined</em> rather than just really big?” is a brilliant one.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0006-rearranging.html">← Lesson 6: Undercover lines</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0008-where-lines-meet.html">Lesson 8: Where lines meet →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* ============================================================
+   Shared, DOM-free drill generators (kept free of document/
+   Graph calls except inside prompt functions, which the quiz
+   engine runs in the browser).
+   ============================================================ */
+const MINUS = '−';
+const fm = n => String(n).replace('-', MINUS);
+const pt = (x, y) => `(${fm(x)}, ${fm(y)})`;
+
+/* Drill 1: a horizontal or vertical line is drawn — type its equation. */
+function genDrill1() {
+  const horizontal = Math.random() < 0.5;
+  const k = Math.random() < 0.18 ? 0 : Quiz.rnz(-6, 6);   // sometimes the axes themselves!
+  const answer = horizontal ? `y = ${fm(k)}` : `x = ${fm(k)}`;   // (Quiz.fmtLine(0,k) would print an ASCII '-')
+  const axisNote = k === 0
+    ? (horizontal ? ' — and y = 0 is the x-axis itself! 🤯' : ' — and x = 0 is the y-axis itself! 🤯')
+    : '';
+  return {
+    prompt(el) {
+      el.innerHTML = 'What is the equation of this line?';
+      const g = Graph.create(el, { width: 300, height: 300, labelEvery: 2 });
+      if (horizontal) g.hline(k, { color: '#0d9488', width: 4 });
+      else g.vline(k, { color: '#ec4899', width: 4 });
+    },
+    input: { placeholder: 'y = …  or  x = …',
+             check: s => Quiz.checkLine(s, horizontal ? { m: 0, c: k } : { type: 'vline', x: k }),
+             answer },
+    explain: horizontal
+      ? `Every point on this line has <strong>y-coordinate ${fm(k)}</strong> — the y is locked, x roams free. So it’s <span class="eq">y = ${fm(k)}</span>${axisNote}`
+      : `Every point on this line has <strong>x-coordinate ${fm(k)}</strong> — the x is locked, y roams free. So it’s <span class="eq">x = ${fm(k)}</span>${axisNote}`,
+  };
+}
+
+/* Drill 2: conceptual MCQs from randomised templates — exactly one correct. */
+const TEMPLATES = [
+  function whichHorizontal() {
+    const k = Quiz.pick([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6]);  // skip ±1: 'y = 1x' formats oddly
+    return {
+      prompt: 'Which of these is a <strong>horizontal</strong> line?',
+      choices: [
+        { html: `<span class="eq">y = ${fm(k)}</span>`, correct: true },
+        { html: `<span class="eq">x = ${fm(k)}</span>` },
+        { html: `<span class="eq">y = ${fm(k)}x</span>` },
+        { html: `<span class="eq">y = x${k > 0 ? ' + ' + k : ' ' + MINUS + ' ' + (-k)}</span>` },
+      ],
+      explain: `A horizontal line locks the <em>y</em>-coordinate: <span class="eq">y = ${fm(k)}</span>. The others all change as x changes — <span class="eq">x = ${fm(k)}</span> is a wall, and anything with an x in it tilts.`,
+    };
+  },
+  function whichVertical() {
+    const k = Quiz.pick([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6]);  // skip ±1: 'y = 1x' formats oddly
+    return {
+      prompt: 'Which of these is a <strong>vertical</strong> line?',
+      choices: [
+        { html: `<span class="eq">x = ${fm(k)}</span>`, correct: true },
+        { html: `<span class="eq">y = ${fm(k)}</span>` },
+        { html: `<span class="eq">y = ${fm(k)}x</span>` },
+        { html: `<span class="eq">y = x${k > 0 ? ' + ' + k : ' ' + MINUS + ' ' + (-k)}</span>` },
+      ],
+      explain: `A vertical line locks the <em>x</em>-coordinate: <span class="eq">x = ${fm(k)}</span>. <span class="eq">y = ${fm(k)}</span> is the flat one, and the rest are ordinary sloping lines.`,
+    };
+  },
+  function whichAxis() {
+    const askX = Math.random() < 0.5;
+    const r = Quiz.ri(1, 5);
+    return {
+      prompt: `Which line <strong>is</strong> the ${askX ? 'x-axis' : 'y-axis'}?`,
+      choices: [
+        { html: `<span class="eq">${askX ? 'y = 0' : 'x = 0'}</span>`, correct: true },
+        { html: `<span class="eq">${askX ? 'x = 0' : 'y = 0'}</span>` },
+        { html: `<span class="eq">y = x</span>` },
+        { html: `<span class="eq">${askX ? 'x = ' + r : 'y = ' + r}</span>` },
+      ],
+      explain: askX
+        ? `Along the x-axis, the <em>height</em> is always 0 — every point is (something, 0). So the x-axis is <span class="eq">y = 0</span>. Backwards-feeling, but true!`
+        : `Along the y-axis, the x-coordinate is always 0 — every point is (0, something). So the y-axis is <span class="eq">x = 0</span>.`,
+    };
+  },
+  function gradientFlat() {
+    let k = Quiz.rnz(-6, 6);
+    if (k === 1) k = Quiz.pick([2, 3, 4, 5, 6]);   // keep the '1' distractor distinct
+    return {
+      prompt: `What is the <strong>gradient</strong> of <span class="eq">y = ${fm(k)}</span>?`,
+      choices: [
+        { html: '0', correct: true },
+        { html: fm(k) },
+        { html: '1' },
+        { html: 'undefined' },
+      ],
+      explain: `<span class="eq">y = ${fm(k)}</span> is flat — it’s <span class="eq">y = 0x + ${fm(k)}</span>, so m = 0. (The ${fm(k)} is c, the height — not the gradient. “Undefined” is the vertical one.)`,
+    };
+  },
+  function gradientWall() {
+    let k = Quiz.rnz(-6, 6);
+    if (k === 1) k = Quiz.pick([2, 3, 4, 5, 6]);
+    return {
+      prompt: `What is the <strong>gradient</strong> of <span class="eq">x = ${fm(k)}</span>?`,
+      choices: [
+        { html: 'undefined', correct: true },
+        { html: '0' },
+        { html: fm(k) },
+        { html: '1' },
+      ],
+      explain: `<span class="eq">x = ${fm(k)}</span> is a wall. Rise ÷ run means dividing by a run of zero — forbidden! So its gradient is <strong>undefined</strong>. (0 is the gradient of a <em>flat</em> line.)`,
+    };
+  },
+  function pointOnWall() {
+    const k = Quiz.rnz(-6, 6);
+    let r = Quiz.rnz(-6, 6);
+    while (r === k) r = Quiz.rnz(-6, 6);
+    return {
+      prompt: `Which point is on the line <span class="eq">x = ${fm(k)}</span>?`,
+      choices: [
+        { html: `<span class="eq">${pt(k, r)}</span>`, correct: true },
+        { html: `<span class="eq">${pt(r, k)}</span>` },
+        { html: `<span class="eq">${pt(0, k)}</span>` },
+        { html: `<span class="eq">${pt(-k, r)}</span>` },
+      ],
+      explain: `On <span class="eq">x = ${fm(k)}</span> the x-coordinate (the <em>first</em> number) is locked at ${fm(k)} — the y can be anything. Only ${pt(k, r)} starts with ${fm(k)}.`,
+    };
+  },
+  function pointOnFloor() {
+    const k = Quiz.rnz(-6, 6);
+    let r = Quiz.rnz(-6, 6);
+    while (r === k) r = Quiz.rnz(-6, 6);
+    return {
+      prompt: `Which point is on the line <span class="eq">y = ${fm(k)}</span>?`,
+      choices: [
+        { html: `<span class="eq">${pt(r, k)}</span>`, correct: true },
+        { html: `<span class="eq">${pt(k, r)}</span>` },
+        { html: `<span class="eq">${pt(k, 0)}</span>` },
+        { html: `<span class="eq">${pt(r, -k)}</span>` },
+      ],
+      explain: `On <span class="eq">y = ${fm(k)}</span> the y-coordinate (the <em>second</em> number) is locked at ${fm(k)} — the x can be anything. Only ${pt(r, k)} ends with ${fm(k)}.`,
+    };
+  },
+];
+
+function genDrill2() {
+  return Quiz.pick(TEMPLATES)();
+}
+
+/* ============================================================
+   DOM below — concept graphs, interactive, drill mounting.
+   ============================================================ */
+
+/* Flat lines */
+const gFlat = Graph.create('flatGraph', { width: 380, height: 380 });
+gFlat.hline(3, { color: '#0d9488', width: 4, label: 'y = 3' });
+gFlat.hline(-2, { color: '#ec4899', width: 4, label: 'y = −2' });
+[[-4, 3], [0, 3], [5, 3]].forEach(([x, y]) =>
+  gFlat.point(x, y, { color: '#f59e0b', label: `(${fm(x)}, 3)` }));
+
+/* Walls */
+const gWall = Graph.create('wallGraph', { width: 380, height: 380 });
+gWall.vline(4, { color: '#7c3aed', width: 4, label: 'x = 4' });
+gWall.vline(-3, { color: '#f59e0b', width: 4, label: 'x = −3' });
+[[4, -5], [4, 0], [4, 6]].forEach(([x, y]) =>
+  gWall.point(x, y, { color: '#ec4899', label: `(4, ${fm(y)})` }));
+
+/* The axes themselves */
+const gAxes = Graph.create('axesGraph', { width: 380, height: 380 });
+gAxes.hline(0, { color: '#0d9488', width: 5 });
+gAxes.text(4.5, 0.7, 'y = 0 (the x-axis!)', { color: '#0d9488', anchor: 'middle' });
+gAxes.vline(0, { color: '#ec4899', width: 5 });
+gAxes.text(0.5, 7.5, 'x = 0 (the y-axis!)', { color: '#ec4899' });
+
+/* ---------- interactive: wall or floor? ---------- */
+const wfG = Graph.create('wfGraph', { width: 380, height: 380 });
+const wfEq = document.getElementById('wfEq');
+const btnY = document.getElementById('btnY');
+const btnX = document.getElementById('btnX');
+let wfMode = 'y';
+let wfK;
+
+function wfDraw() {
+  const k = wfK.value;
+  wfG.clear();
+  if (wfMode === 'y') {
+    wfG.hline(k, { color: '#0d9488', width: 4 });
+    [-5, 0, 5].forEach(x => wfG.point(x, k, { color: '#f59e0b', label: `(${fm(x)}, ${fm(k)})` }));
+    wfEq.innerHTML = `y = ${fm(k)} &nbsp;<span style="font-size:.9rem;color:#8b7fb8">flat floor · gradient 0${k === 0 ? ' · the x-axis itself! 🤯' : ''}</span>`;
+  } else {
+    wfG.vline(k, { color: '#ec4899', width: 4 });
+    [-5, 0, 5].forEach(y => wfG.point(k, y, { color: '#f59e0b', label: `(${fm(k)}, ${fm(y)})` }));
+    wfEq.innerHTML = `x = ${fm(k)} &nbsp;<span style="font-size:.9rem;color:#8b7fb8">wall · gradient undefined${k === 0 ? ' · the y-axis itself! 🤯' : ''}</span>`;
+  }
+}
+function wfSetMode(mode) {
+  wfMode = mode;
+  btnY.className = mode === 'y' ? 'btn' : 'btn secondary';
+  btnX.className = mode === 'x' ? 'btn' : 'btn secondary';
+  wfDraw();
+}
+wfK = Graph.slider('wfSlider', { label: 'k', min: -6, max: 6, step: 1, value: 3,
+  color: '#7c3aed', onInput: wfDraw });
+btnY.addEventListener('click', () => wfSetMode('y'));
+btnX.addEventListener('click', () => wfSetMode('x'));
+wfDraw();
+
+/* ---------- drills ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Name that line 🏷️',
+  intro: 'A wall or a floor appears — type its equation, like <span class="eq">y = 4</span> or <span class="eq">x = −2</span>. Watch out: sometimes it’s an axis in disguise…',
+  rounds: 8,
+  generate: genDrill1,
+});
+
+Quiz.create('drill2', {
+  title: 'Drill 2 · True colours 🎨',
+  intro: 'The trick-question round: gradients of weird lines, secret identities of the axes, and points with one coordinate locked. This is where those exam marks live.',
+  rounds: 8,
+  generate: genDrill2,
+});
+</script>
+</body>
+</html>

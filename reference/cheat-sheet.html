@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear Graphs — Cheat Sheet</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero no-print">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Quick Reference</p>
+    <h1>The One-Page Cheat Sheet 📄</h1>
+    <p>Everything from the course, compressed. Print it, stick it above your desk.</p>
+  </div>
+
+  <div class="card ref-section">
+    <h2>The equation</h2>
+    <div class="eq-big">y = <span class="m-color">m</span>x + <span class="c-color">c</span></div>
+    <ul>
+      <li><strong class="m-color">m — gradient</strong> (aka slope): for every <strong>1 across</strong>, the line goes <strong>up m</strong>.
+        Positive = uphill ↗, negative = downhill ↘, bigger |m| = steeper.
+        Formula between two points: <span class="eq">m = (y₂ − y₁) ÷ (x₂ − x₁)</span> = rise ÷ run.</li>
+      <li><strong class="c-color">c — y-intercept</strong>: the line crosses the y-axis at (0, c).</li>
+      <li>⚠️ In <span class="eq">y = 7 − 2x</span>, m = −2 and c = 7. The number <em>glued to x</em> is always m, wherever it’s written.</li>
+    </ul>
+  </div>
+
+  <div class="card ref-section">
+    <h2>Plotting y = mx + c (2 steps)</h2>
+    <ol>
+      <li>Dot at <span class="eq">(0, c)</span> on the y-axis.</li>
+      <li>From there: <strong>across 1, up m</strong> (for m = ½: across 2, up 1). Repeat, join with a ruler.</li>
+    </ol>
+    <p>Backup method: table of values — pick x = 0, 1, 2, compute y each time, plot, join.</p>
+  </div>
+
+  <div class="card ref-section">
+    <h2>Graph → equation (detective recipe)</h2>
+    <ol>
+      <li><strong>c</strong> = where it crosses the y-axis.</li>
+      <li><strong>m</strong> = pick two neat grid points on the line, count rise ÷ run (downhill ⇒ negative).</li>
+      <li>Write <span class="eq">y = mx + c</span>. Check with one point on the line.</li>
+    </ol>
+  </div>
+
+  <div class="card ref-section">
+    <h2>Table → equation</h2>
+    <ol>
+      <li><strong>m</strong> = the step in y each time x goes up by 1.</li>
+      <li><strong>c</strong> = the y-value when x = 0. Not in the table? Step backwards, or use <span class="eq">c = y − m·x</span> with any row.</li>
+      <li>Test your equation on one more row. ✓</li>
+    </ol>
+    <table class="vals">
+      <tr><th>x</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><th>y</th><td>1</td><td>4</td><td>7</td><td>10</td></tr>
+    </table>
+    <p style="text-align:center">steps of +3 ⇒ m = 3; y = 1 at x = 0 ⇒ c = 1 ⇒ <span class="eq">y = 3x + 1</span></p>
+  </div>
+
+  <div class="card ref-section">
+    <h2>Rearranging into y = mx + c</h2>
+    <p>Mission: <strong>get y alone</strong>. Whatever you do to one side, do to the other — to <em>every</em> term.</p>
+    <ul>
+      <li><span class="eq">2y = 6x + 8</span> → divide <em>everything</em> by 2 → <span class="eq">y = 3x + 4</span></li>
+      <li><span class="eq">y + 2x = 7</span> → subtract 2x → <span class="eq">y = −2x + 7</span></li>
+    </ul>
+    <p>Only read off m and c <em>after</em> y is alone.</p>
+  </div>
+
+  <div class="card ref-section">
+    <h2>The weird ones 👻</h2>
+    <table class="vals">
+      <tr><th>Equation</th><th>Shape</th><th>Gradient</th><th>Fits y = mx + c?</th></tr>
+      <tr><td>y = k</td><td>horizontal (flat)</td><td>0</td><td>yes: y = 0x + k</td></tr>
+      <tr><td>x = k</td><td>vertical (wall)</td><td>undefined</td><td>no!</td></tr>
+      <tr><td>y = 0</td><td>the x-axis itself</td><td>0</td><td>yes</td></tr>
+      <tr><td>x = 0</td><td>the y-axis itself</td><td>undefined</td><td>no</td></tr>
+    </table>
+    <p>Memory hook: <em>the letter tells you which coordinate is locked.</em> y = 3 → every point has y = 3 (flat). x = 3 → every point has x = 3 (wall).</p>
+  </div>
+
+  <div class="card ref-section">
+    <h2>Where two lines meet 💥</h2>
+    <ol>
+      <li>Set the right-hand sides equal: <span class="eq">m₁x + c₁ = m₂x + c₂</span>.</li>
+      <li>Solve for x. Substitute back into <em>either</em> equation for y.</li>
+      <li>The answer is a <strong>point (x, y)</strong> — it must work in <em>both</em> equations.</li>
+    </ol>
+    <p>Same m, different c ⇒ <strong>parallel</strong>, never meet. Same m <em>and</em> same c ⇒ same line.</p>
+  </div>
+
+  <div class="card no-print">
+    <p class="footer-links">
+      <a href="../index.html">🏠 Course map</a> ·
+      <a href="glossary.html">📖 Glossary</a> ·
+      Print me: File → Print (the coloured headers stay out of the way).
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

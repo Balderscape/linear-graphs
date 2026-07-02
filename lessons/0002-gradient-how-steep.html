@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 2 · Gradient: How Steep? ⛰️</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 2 of 9</p>
+    <h1>Gradient: How Steep? ⛰️</h1>
+    <p>Every line has a steepness score. Today you learn to read it straight off the picture — no formulas, just stairs.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>By the end you’ll glance at <em>any</em> straight line and read its gradient:
+    <strong>for every 1 step right, how far does it go up?</strong> That number is
+    <span class="eq"><span class="m-color">m</span></span>. Uphill → positive. Downhill → negative. Done.</p>
+  </div>
+
+  <div class="card">
+    <h2>Gradient is a staircase 🪜</h2>
+    <p>Forget “steepness” as a vague vibe — make it a number. Stand on the line, take
+    <strong>1 step across</strong> (to the right), and ask: <em>how far up did the line climb?</em>
+    That climb is the <strong class="m-color">gradient</strong>. (Americans call it “slope” — same thing, different accent. 🇺🇸)</p>
+    <div class="eq-big"><span class="m-color">m</span> = rise ÷ run &nbsp;=&nbsp; <em>up</em> ÷ <em>across</em></div>
+    <p>Here’s <span class="eq">y = 2x − 1</span> with a step-triangle drawn on it:
+    <strong>across 1, up 2</strong> — so <span class="eq"><span class="m-color">m = 2</span></span>.
+    Every single step on this line climbs by 2. That’s what “gradient 2” <em>means</em>.</p>
+    <div id="stairsGraph"></div>
+    <p>And if the line falls as you step right? Then the “up” is really a <em>down</em>,
+    so the gradient is <strong>negative</strong>. Downhill left-to-right = negative m. Always. ⬇️</p>
+  </div>
+
+  <div class="card">
+    <h2>🎛️ The steepness dial</h2>
+    <p>One pink slider, one line through the origin. Drag it and watch the staircase triangles resize themselves.</p>
+    <div id="dialSlider"></div>
+    <p class="eq-big" id="dialReadout"></p>
+    <div id="dialGraph"></div>
+    <div class="tip"><strong>Try these missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Make the line go <strong>downhill</strong>. What happened to the sign of m — and which way do the triangles point now?</li>
+        <li>Set <strong>m = 0.5</strong>. Look at the bigger triangle: <strong>across 2, up 1</strong>. Gentle little ramp. 🛹</li>
+        <li>Find what <strong>m = 0</strong> looks like. How far “up” is each step?</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> you just discovered the whole story — big m = steep, small m = gentle,
+    negative m = downhill, zero m = flat. Everything else in this lesson is just reading that off a picture.</div>
+  </div>
+
+  <div class="card">
+    <h2>Gradients can be fractions 🍰</h2>
+    <p>What if 1 step across only climbs half a square? Awkward to see — so take <strong>2 steps across</strong> instead.
+    If the line goes <strong>across 2 and up 1</strong>, then each single step climbs ½:</p>
+    <div class="eq-big"><span class="m-color">m</span> = rise ÷ run = 1 ÷ 2 = <span class="m-color">½</span></div>
+    <p>That’s the trick for any fraction: pick a run that makes the rise land neatly on a grid corner,
+    then divide. Rise ÷ run <em>always</em> works, whatever size step you take.</p>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills: first read gradients off ready-made triangles, then build the triangles yourself
+    between two points. Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>Best explainer on the internet for this:
+    <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:linear-equations-graphs" target="_blank">
+    Khan Academy — Linear equations &amp; graphs (Intro to slope)</a> — remember they say “slope” for gradient.
+    For quick UK-style video run-throughs, the
+    <a href="https://corbettmaths.com/?s=gradient" target="_blank">Corbettmaths gradient videos</a> are excellent.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — “why does across 2 up 1 give the
+    same answer as across 4 up 2?” is a cracking question, for instance.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0001-meet-the-line.html">← Lesson 1: Meet the line</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0003-plotting-lines.html">Lesson 3: Plotting lines like a pro →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* ---------- worked example: staircase on y = 2x − 1 ---------- */
+const sg = Graph.create('stairsGraph', { width: 380, height: 380 });
+sg.line(2, -1, { color: '#7c3aed', width: 4, label: 'y = 2x − 1' });
+sg.riseRun(1, 1, 2, -1);
+sg.point(1, 1, { color: '#ec4899' });
+sg.point(2, 3, { color: '#ec4899' });
+
+/* ---------- interactive: the steepness dial ---------- */
+const dg = Graph.create('dialGraph', { width: 420, height: 420 });
+const readout = document.getElementById('dialReadout');
+let mS;
+function dialRedraw() {
+  dg.clear();
+  const m = mS.value;
+  dg.line(m, 0, { color: '#7c3aed', width: 4 });
+  dg.riseRun(0, 2, m, 0);
+  dg.riseRun(-2, 1, m, 0);
+  readout.innerHTML = m === 0
+    ? 'across 1 → up 0, so <span class="m-color">m = 0</span> — totally flat! 🛣️'
+    : `across 1 → ${m > 0 ? 'up' : 'down'} ${Math.abs(m)}, so <span class="m-color">m = ${String(m).replace('-', '−')}</span>`;
+}
+mS = Graph.slider('dialSlider', { label: 'm (gradient)', min: -4, max: 4, step: 0.5, value: 1,
+  color: '#ec4899', onInput: dialRedraw });
+dialRedraw();
+
+/* ---------- shared bits for the drills ---------- */
+const FRIENDLY_MS = [-3, -2, -1, -0.5, 0.5, 1, 2, 3];
+const neg = s => String(s).replace('-', '−');
+function riseRunExplain(lead, dx, rise, m) {
+  const absRise = Math.abs(rise);
+  const frac = `${absRise}/${dx}`;
+  let ex = `${lead} <strong>across ${dx}</strong> and <strong>${rise > 0 ? 'up' : 'down'} ${absRise}</strong>. ` +
+           `Gradient = rise ÷ run = ${rise < 0 ? '−' : ''}${frac}`;
+  if (frac !== Quiz.fmtNum(Math.abs(m))) ex += ` = ${neg(Quiz.fmtNum(m))}`;
+  ex += rise < 0 ? '. It falls left-to-right, so m is negative.' : '.';
+  return ex;
+}
+
+/* ---------- drill 1: read the gradient off a triangle ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Read the gradient 📏',
+  intro: 'A line with its step-triangle already drawn. Read off the rise and the run, then divide. Mind the sign!',
+  rounds: 8,
+  generate() {
+    const m = Quiz.pick(FRIENDLY_MS);
+    const c = Quiz.ri(-3, 3);
+    const dx = Math.abs(m) === 0.5 ? 2 : 1;   // keep the rise a whole number
+    const x0 = Quiz.pick([-2, -1, 0, 1]);
+    const rise = m * dx;
+    const right = neg(Quiz.fmtNum(m));
+    const distract = new Set();
+    for (const w of [-m, 1 / m, -1 / m, m + 1, m - 1, m + 2]) {
+      const f = neg(Quiz.fmtNum(w));
+      if (f !== right) distract.add(f);
+      if (distract.size === 3) break;
+    }
+    return {
+      prompt(el) {
+        el.innerHTML = 'What is the <strong>gradient</strong> of this line?';
+        const gg = Graph.create(el, { width: 300, height: 300 });
+        gg.line(m, c, { color: '#7c3aed', width: 4 });
+        gg.riseRun(x0, dx, m, c);
+      },
+      choices: [{ html: right, correct: true },
+        ...[...distract].map(w => ({ html: w }))],
+      explain: riseRunExplain('The dashed triangle goes', dx, rise, m),
+    };
+  },
+});
+
+/* ---------- drill 2: gradient between two points ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Gradient between two points 🧗',
+  intro: 'No triangle this time — build it in your head. Across from A to B, up from A to B, divide.',
+  rounds: 8,
+  generate() {
+    const m = Quiz.pick(FRIENDLY_MS);
+    const dx = Quiz.pick(
+      Math.abs(m) === 0.5 ? [2, 4] :          // even run keeps the rise whole
+      Math.abs(m) === 3 ? [1, 2] : [1, 2, 4]  // and keep |rise| ≤ 8
+    );
+    const rise = m * dx;
+    const x1 = Quiz.ri(-6, Math.min(2, 5 - dx));
+    const y1 = Quiz.ri(Math.max(-7, -7 - rise), Math.min(7, 7 - rise));
+    const x2 = x1 + dx, y2 = y1 + rise;
+    const right = neg(Quiz.fmtNum(m));
+    const distract = new Set();
+    for (const w of [-m, 1 / m, -1 / m, rise, -rise, m + 1, m - 1]) {
+      const f = neg(Quiz.fmtNum(w));
+      if (f !== right) distract.add(f);
+      if (distract.size === 3) break;
+    }
+    return {
+      prompt(el) {
+        el.innerHTML = 'What is the gradient of the line through <strong>A</strong> and <strong>B</strong>?';
+        const gg = Graph.create(el, { width: 300, height: 300 });
+        gg.segment(x1, y1, x2, y2, { color: '#7c3aed', width: 4 });
+        gg.point(x1, y1, { color: '#ec4899', label: `A (${x1}, ${y1})` });
+        gg.point(x2, y2, { color: '#0d9488', label: `B (${x2}, ${y2})` });
+      },
+      choices: [{ html: right, correct: true },
+        ...[...distract].map(w => ({ html: w }))],
+      explain: riseRunExplain(
+        `From A(${x1}, ${y1}) to B(${x2}, ${y2}) you go`, dx, rise, m),
+    };
+  },
+});
+</script>
+</body>
+</html>

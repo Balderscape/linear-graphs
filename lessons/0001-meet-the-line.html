@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 1 · Meet the Line: y = mx + c</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 1 of 9</p>
+    <h1>Meet the Line: y&nbsp;=&nbsp;mx&nbsp;+&nbsp;c 🎢</h1>
+    <p>Two little numbers control every straight line in the universe. Today you take the controls.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>By the end you’ll look at an equation like <span class="eq">y = 2x + 3</span> and instantly know
+    what its two numbers do — no plotting required. That’s it. One idea, properly owned.</p>
+  </div>
+
+  <div class="card">
+    <h2>A line is just a rule</h2>
+    <p>An equation like <span class="eq">y = 2x + 3</span> is a <strong>rule connecting x and y</strong>:
+    “pick any <em>x</em> you like, double it, add 3 — that’s your <em>y</em>.”
+    Every point that follows the rule gets drawn, and together they make a perfectly straight line.</p>
+    <div class="eq-big">y = <span class="m-color">m</span>x + <span class="c-color">c</span></div>
+    <p>The two numbers have jobs:</p>
+    <ul>
+      <li><strong class="m-color">m</strong> — the <strong>gradient</strong> (Americans say “slope”): how <em>steep</em> the line is, and which way it tilts.</li>
+      <li><strong class="c-color">c</strong> — the <strong>y-intercept</strong>: where the line crosses the <em>y-axis</em>.</li>
+    </ul>
+    <p>Don’t memorise that — <em>feel</em> it. Playground time. 👇</p>
+  </div>
+
+  <div class="card">
+    <h2>🕹️ The line machine</h2>
+    <p>Drag the sliders. Watch what each one does to the line.</p>
+    <div id="playSliders"></div>
+    <p class="eq-big" id="playEq"></p>
+    <div id="playGraph"></div>
+    <div class="tip"><strong>Try these missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Make the line completely <strong>flat</strong>. (Which slider did it? What value?)</li>
+        <li>Make it slope <strong>downhill</strong> from left to right.</li>
+        <li>Make it cross the y-axis at <strong>−4</strong> — without touching the pink slider.</li>
+        <li>Make the <strong>steepest</strong> possible uphill line.</li>
+        <li>Slide <span class="c-color"><strong>c</strong></span> up and down: the line doesn’t tilt, it just <em>elevator-rides</em>. 🛗</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> if you did those five missions, you already understand
+    <span class="eq">y = mx + c</span> better than half the class. The rest of this course is just practice.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two quick-fire drills. Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>Best short video on this (UK notation, same as ours):
+    <a href="https://corbettmaths.com/2013/05/29/ymxc/" target="_blank">Corbettmaths — y = mx + c (Video 191)</a>.
+    For a second angle with free practice:
+    <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations" target="_blank">
+    Khan Academy — Forms of linear equations</a> (they write <span class="eq">y = mx + b</span>;
+    their <em>b</em> is our <em>c</em>). And for pure play,
+    <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a> — type <code>y = mx + c</code>
+    and it offers you sliders, just like the machine above.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — “why does a negative m go downhill?”
+    is an excellent question, for instance.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0002-gradient-how-steep.html">Lesson 2: Gradient — how steep? →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* ---------- playground ---------- */
+const g = Graph.create('playGraph', { width: 420, height: 420 });
+const eqEl = document.getElementById('playEq');
+let mS, cS;
+function colouredEq(m, c) {
+  const mtxt = m === 1 ? '' : m === -1 ? '−' : String(m).replace('-', '−');
+  let s = `y = <span class="m-color">${mtxt}x</span>`;
+  if (m === 0) s = 'y =';
+  if (c > 0) s += ` <span class="c-color">${m === 0 ? '' : '+ '}${c}</span>`;
+  else if (c < 0) s += ` <span class="c-color">− ${-c}</span>`;
+  else if (m === 0) s += ' <span class="c-color">0</span>';
+  return s;
+}
+function redraw() {
+  g.clear();
+  const m = mS.value, c = cS.value;
+  g.line(m, c, { color: '#7c3aed', width: 4 });
+  g.point(0, c, { color: '#0d9488' });
+  eqEl.innerHTML = colouredEq(m, c);
+}
+mS = Graph.slider('playSliders', { label: 'm (gradient)', min: -5, max: 5, step: 1, value: 1,
+  color: '#ec4899', onInput: redraw });
+cS = Graph.slider('playSliders', { label: 'c (intercept)', min: -8, max: 8, step: 1, value: 2,
+  color: '#0d9488', onInput: redraw });
+redraw();
+
+/* ---------- drill 1: spot m and c ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Spot the m and the c 🔍',
+  intro: 'Read the equation, name the number. Watch out — the order can be sneaky!',
+  rounds: 8,
+  generate() {
+    const m = Quiz.rnz(-6, 6), c = Quiz.rnz(-9, 9);
+    const flip = Math.random() < 0.3; // sometimes write y = c + mx
+    const eq = flip
+      ? `y = ${Quiz.fmtNum(c)} ${m < 0 ? '−' : '+'} ${Math.abs(m) === 1 ? '' : Math.abs(m)}x`
+      : Quiz.fmtLine(m, c);
+    const askM = Math.random() < 0.5;
+    const right = askM ? m : c;
+    const wrongs = new Set();
+    for (const w of [askM ? c : m, -right, askM ? -c : -m, right + 1, right - 1]) {
+      if (w !== right) wrongs.add(w);
+      if (wrongs.size === 3) break;
+    }
+    return {
+      prompt: `What is the <strong>${askM ? 'gradient <span class="m-color">m</span>' : 'y-intercept <span class="c-color">c</span>'}</strong> of
+               <span class="eq">${eq}</span>?`,
+      choices: [{ html: Quiz.fmtNum(right), correct: true },
+        ...[...wrongs].map(w => ({ html: Quiz.fmtNum(w) }))],
+      explain: askM
+        ? `The gradient is the number <em>multiplying x</em> — here that’s ${Quiz.fmtNum(m)}, even if it isn’t written first.`
+        : `The y-intercept is the number <em>on its own</em> (no x attached) — here that’s ${Quiz.fmtNum(c)}.`,
+    };
+  },
+});
+
+/* ---------- drill 2: match the graph to its equation ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Which equation is this line? 👀',
+  intro: 'Look at where it crosses the y-axis and which way it tilts. You don’t need to measure anything yet.',
+  rounds: 8,
+  generate() {
+    const m = Quiz.rnz(-3, 3), c = Quiz.rnz(-5, 5);
+    const distract = new Set();
+    for (const [dm, dc] of [[-m, c], [m, -c], [c, m], [-m, -c], [m + 1, c], [m, c + 2]]) {
+      const k = Quiz.fmtLine(dm, dc);
+      if (k !== Quiz.fmtLine(m, c)) distract.add(k);
+      if (distract.size === 3) break;
+    }
+    return {
+      prompt(el) {
+        el.innerHTML = 'Which equation matches this line?';
+        const gg = Graph.create(el, { width: 300, height: 300, labelEvery: 2 });
+        gg.line(m, c, { color: '#7c3aed', width: 4 });
+        gg.point(0, c, { color: '#0d9488' });
+      },
+      choices: [{ html: `<span class="eq">${Quiz.fmtLine(m, c)}</span>`, correct: true },
+        ...[...distract].map(d => ({ html: `<span class="eq">${d}</span>` }))],
+      explain: `The teal dot shows it crossing the y-axis at ${Quiz.fmtNum(c)} — so c = ${Quiz.fmtNum(c)}. ` +
+        `It slopes ${m > 0 ? 'uphill, so m is positive' : 'downhill, so m is negative'} — and m = ${Quiz.fmtNum(m)}.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

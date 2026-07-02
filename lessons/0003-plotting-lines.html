@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3 · Plotting Lines Like a Pro 📍</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 3 of 9</p>
+    <h1>Plotting Lines Like a Pro 📍</h1>
+    <p>Given any equation, you’ll drop the dots and draw the line in under twenty seconds. Two steps. That’s the whole trick.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>By the end you’ll plot any <span class="eq">y = <span class="m-color">m</span>x + <span class="c-color">c</span></span>
+    fast, with the two-step recipe:
+    <strong>① dot at <span class="c-color">c</span> on the y-axis</strong>, then
+    <strong>② from there, across 1, up <span class="m-color">m</span></strong> for more dots.
+    Join them with a ruler-straight line. Done.</p>
+  </div>
+
+  <div class="card">
+    <h2>The two-step recipe 🧑‍🍳</h2>
+    <p>Let’s plot <span class="eq">y = 2x − 1</span> together:</p>
+    <ol>
+      <li><strong>Start at <span class="c-color">c</span>.</strong> Here c = −1, so put a dot at (0, −1) on the y-axis. That’s the teal dot below.</li>
+      <li><strong>Step by <span class="m-color">m</span>.</strong> Here m = 2, so from your dot go <strong>across 1, up 2</strong> → dot at (1, 1). Do it again → dot at (2, 3).</li>
+      <li><strong>Join the dots</strong> with one dead-straight line, and extend it both ways. 📏</li>
+    </ol>
+    <div id="workedGraph"></div>
+    <p>If m is a fraction like ½, use the Lesson 2 trick: step <strong>across 2, up 1</strong> instead —
+    same gradient, friendlier dots. And if m is negative, your steps go <em>down</em>, not up.</p>
+  </div>
+
+  <div class="card">
+    <h2>Backup plan: a table of values 🗂️</h2>
+    <p>If the recipe ever deserts you (exam nerves are real), just <strong>feed the rule some x-values</strong>
+    and compute y each time. For <span class="eq">y = 2x − 1</span> with x = 0, 1, 2:</p>
+    <table class="vals">
+      <tr><th>x</th><td>0</td><td>1</td><td>2</td></tr>
+      <tr><th>y</th><td>−1</td><td>1</td><td>3</td></tr>
+    </table>
+    <p>Plot (0, −1), (1, 1), (2, 3) — exactly the same three dots the recipe gave you, because it’s
+    exactly the same maths. The recipe is just the table on fast-forward. ⏩</p>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Click-to-plot</h2>
+    <p>Your turn — no sliders, no safety net. I give you an equation; you <strong>click 3 different points
+    that sit exactly on its line</strong>. Get all three and the line draws itself. Six lines to conquer,
+    each a bit spicier than the last. 🌶️</p>
+    <p class="eq-big" id="targetEq"></p>
+    <p id="gameScore" style="text-align:center;font-weight:700;color:#8b7fb8"></p>
+    <div id="plotGame"></div>
+    <p id="gameMsg" style="font-weight:700;min-height:1.5em"></p>
+    <p style="text-align:center"><button class="btn" id="nextLineBtn" style="display:none">New line ➡️</button></p>
+    <div class="tip"><strong>Pro strategy:</strong> always claim the freebie first — the dot at
+    <span class="c-color">c</span> on the y-axis. Then step across 1, up <span class="m-color">m</span>
+    (across 2, up 1 for the half). For the last one, watch the grey grid corners: the line only ever
+    touches corners it exactly passes through.</div>
+    <div class="win">💚 <strong>Easy win:</strong> finish even <em>one</em> line here and you’ve done real plotting —
+    the same skill as pencil-and-paper, just with instant marking. Finish all six and you can plot anything Year 10 throws at you.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>One quick-fire drill: spot the point that actually obeys the rule. Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>Best walkthrough for this:
+    <a href="https://corbettmaths.com/?s=drawing+linear+graphs" target="_blank">
+    Corbettmaths — Drawing linear graphs (videos, textbook exercises and practice questions)</a>,
+    which uses the xy-table method from the backup plan above. And to check <em>any</em> plot you ever draw,
+    type the equation into <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>
+    and see if its line matches yours.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — “why do I only need two points
+    to draw the whole line?” is a brilliant question, for instance.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0002-gradient-how-steep.html">← Lesson 2: Gradient — how steep?</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0004-graph-to-equation.html">Lesson 4: Graph to equation →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* ---------- worked example: y = 2x − 1, step by step ---------- */
+const wg = Graph.create('workedGraph', { width: 380, height: 380 });
+wg.line(2, -1, { color: '#7c3aed', width: 3, label: 'y = 2x − 1' });
+wg.riseRun(0, 1, 2, -1);
+wg.riseRun(1, 1, 2, -1);
+wg.point(0, -1, { color: '#0d9488', label: 'start: c = −1' });
+wg.point(1, 1, { color: '#ec4899' });
+wg.point(2, 3, { color: '#ec4899' });
+
+/* ---------- click-to-plot game ---------- */
+const EQS = [
+  { m: 1,   c: 2,  disp: 'y = x + 2' },
+  { m: 2,   c: -3, disp: 'y = 2x − 3' },
+  { m: -1,  c: 4,  disp: 'y = −x + 4' },
+  { m: 3,   c: 0,  disp: 'y = 3x' },
+  { m: -2,  c: 1,  disp: 'y = −2x + 1' },
+  { m: 0.5, c: 1,  disp: 'y = x/2 + 1' },
+];
+const pg = Graph.create('plotGame', { width: 420, height: 420 });
+const targetEl = document.getElementById('targetEq');
+const scoreEl = document.getElementById('gameScore');
+const msgEl = document.getElementById('gameMsg');
+const nextBtn = document.getElementById('nextLineBtn');
+const CHEERS = ['Lovely!', 'That’s on it!', 'Bang on!', 'Beautiful click!'];
+let idx = 0, done = 0, hits = [];
+
+function msg(html, colour) { msgEl.innerHTML = html; msgEl.style.color = colour; }
+function updateScore() { scoreEl.textContent = `Lines completed: ${done}/${EQS.length}`; }
+function loadEq() {
+  pg.clear();
+  hits = [];
+  nextBtn.style.display = 'none';
+  targetEl.innerHTML = `Plot: <span class="eq">${EQS[idx].disp}</span>`;
+  msg('Click 3 different points that sit exactly on this line. The y-intercept is a freebie… 😉', '#7c3aed');
+}
+
+pg.onClick((x, y) => {
+  if (hits.length >= 3) return;                       // line finished — wait for the button
+  const { m, c, disp } = EQS[idx];
+  if (hits.some(h => h.x === x && h.y === y)) {
+    msg('You’ve already claimed that point — find a different one on the line! 😄', '#f59e0b');
+    return;
+  }
+  if (Quiz.approx(m * x + c, y)) {
+    pg.point(x, y, { color: '#16a34a' });
+    hits.push({ x, y });
+    if (hits.length < 3) {
+      msg(`✓ ${Quiz.pick(CHEERS)} ${hits.length}/3 points — keep going. 🎯`, '#16a34a');
+    } else {
+      pg.line(m, c, { color: '#7c3aed', width: 4 });
+      done++;
+      updateScore();
+      Quiz.confetti();
+      if (done === EQS.length) {
+        msg('🏆 <strong>ALL SIX LINES!</strong> You are officially a plotting pro — take a bow. 🥳', '#16a34a');
+        nextBtn.textContent = 'Play again 🔁';
+      } else {
+        msg(`✨ Three points, one perfect line — <span class="eq">${disp}</span> complete!`, '#16a34a');
+        nextBtn.textContent = 'New line ➡️';
+      }
+      nextBtn.style.display = '';
+    }
+  } else {
+    const dot = pg.point(x, y, { color: '#ef4444' });
+    setTimeout(() => dot.remove(), 900);
+    msg('✗ Not on this line — remember: start at <span class="c-color">c</span> on the y-axis, then step across 1, up <span class="m-color">m</span>.', '#ef4444');
+  }
+}, 1);
+
+nextBtn.addEventListener('click', () => {
+  if (done === EQS.length) { done = 0; idx = 0; updateScore(); }
+  else idx++;
+  loadEq();
+});
+updateScore();
+loadEq();
+
+/* ---------- drill: which point is on the line? ---------- */
+Quiz.create('drill1', {
+  title: 'Drill · Which point is on the line? 🕵️',
+  intro: 'No graph needed — substitute the x-coordinate into the rule and see if the y-coordinate obeys.',
+  rounds: 8,
+  generate() {
+    const m = Quiz.rnz(-3, 3), c = Quiz.ri(-5, 5);
+    const x0 = Quiz.ri(1, 3), y0 = m * x0 + c;
+    const fmtPt = (a, b) => `(${String(a).replace('-', '−')}, ${String(b).replace('-', '−')})`;
+    const right = fmtPt(x0, y0);
+    const distract = new Set();
+    for (const [px, py] of [[x0, y0 + 1], [x0, y0 - 1], [x0 + 1, y0], [x0 - 1, y0], [c, x0]]) {
+      if (py === m * px + c) continue;       // never offer a second point that's genuinely on the line
+      const f = fmtPt(px, py);
+      if (f !== right) distract.add(f);
+      if (distract.size === 3) break;
+    }
+    const cTxt = c === 0 ? '' : c > 0 ? ` + ${c}` : ` − ${-c}`;
+    return {
+      prompt: `Which of these points lies on the line <span class="eq">${Quiz.fmtLine(m, c)}</span>?`,
+      choices: [{ html: right, correct: true },
+        ...[...distract].map(h => ({ html: h }))],
+      explain: `Substitute x = ${x0} into the rule: y = ${Quiz.fmtNum(m).replace('-', '−')} × ${x0}${cTxt} ` +
+        `= ${String(y0).replace('-', '−')}. So ${right} obeys the rule — none of the other points do.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

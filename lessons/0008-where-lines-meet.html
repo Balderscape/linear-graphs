@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 8 · Where Lines Meet 💥</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 8 of 9</p>
+    <h1>Where Lines Meet 💥</h1>
+    <p>Two lines on one grid — sooner or later most pairs collide. Today you become the crash investigator.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>You’ll find the <strong>intersection</strong> of two lines — the single point <span class="eq">(x, y)</span>
+    that obeys <em>both</em> rules at once. First by reading it straight off the graph, then by a slick bit of
+    algebra that needs no graph at all. And you’ll learn to spot the one kind of pair that
+    <em>never</em> meets. 👯</p>
+  </div>
+
+  <div class="card">
+    <h2>Two rules, one point</h2>
+    <p>Remember: every line is a <strong>rule</strong>. Here are two rules sharing one grid —
+    <span class="eq" style="color:#7c3aed">y = 2x − 1</span> in purple and
+    <span class="eq" style="color:#ec4899">y = −x + 5</span> in pink.</p>
+    <div id="meetGraph"></div>
+    <p>The amber point <span class="eq">(2, 3)</span> is where they crash — and it’s special:
+    it’s the <strong>only point in the universe that obeys both rules</strong>. Check it yourself:</p>
+    <ul>
+      <li>Purple rule: <span class="eq">y = 2 × 2 − 1 = 3</span> ✓</li>
+      <li>Pink rule: <span class="eq">y = −2 + 5 = 3</span> ✓</li>
+    </ul>
+    <p>Same x, same y, both equations happy. Every other point on the grid disappoints at least one of them.</p>
+  </div>
+
+  <div class="card">
+    <h2>The algebra shortcut</h2>
+    <p>No graph handy? No problem. At the crash point the two lines have the <em>same y</em> —
+    so their right-hand sides must be <strong>equal</strong>. Set
+    <span class="eq">mx + c = m′x + c′</span>, solve for x, then substitute back to get y.
+    Watch it work on the same pair:</p>
+    <ol>
+      <li>Set the right-hand sides equal: <span class="eq">2x − 1 = −x + 5</span></li>
+      <li>Add x to both sides: <span class="eq">3x − 1 = 5</span></li>
+      <li>Add 1 to both sides: <span class="eq">3x = 6</span>, so <span class="eq">x = 2</span></li>
+      <li>Substitute into either line: <span class="eq">y = 2 × 2 − 1 = 3</span></li>
+    </ol>
+    <div class="eq-big">Crash site: (2, 3) 💥</div>
+    <p>Exactly what the graph said — but this way works even when the answer isn’t a nice
+    whole number, and it’s the method examiners love to see.</p>
+  </div>
+
+  <div class="card">
+    <h2>Lines that never meet 👯</h2>
+    <p>One famous exception. If two lines have the <strong>same gradient</strong> but
+    <strong>different intercepts</strong>, they climb at exactly the same rate forever —
+    so the gap between them never closes. They’re <strong>parallel</strong>: zero intersections.</p>
+    <div id="parallelGraph"></div>
+    <p><span class="eq" style="color:#7c3aed">y = 2x + 1</span> and
+    <span class="eq" style="color:#ec4899">y = 2x − 3</span>: both have
+    <span class="m-color"><strong>m = 2</strong></span>, so no crash, ever.
+    (Try the algebra: <span class="eq">2x + 1 = 2x − 3</span> collapses to
+    <span class="eq">1 = −3</span> — nonsense, which is algebra’s way of saying “never”.)</p>
+    <p>And one cheeky footnote: same gradient <em>and</em> same intercept means it’s the
+    <strong>same line</strong> wearing two name tags — infinitely many shared points.</p>
+  </div>
+
+  <div class="card">
+    <h2>💥 Crash detector</h2>
+    <p>Your turn, detective. Deal a pair of lines, then <strong>click the exact point where they crash</strong>.
+    But stay sharp — some pairs are parallel. If you reckon the lines never meet, press the 🙅 button instead of clicking.</p>
+    <p>
+      <button class="btn" id="newPairBtn">New pair 🎲</button>
+      <button class="btn secondary" id="neverBtn">They never meet! 🙅</button>
+      <span id="crashScore" style="font-weight:700;color:#7c3aed;margin-left:10px">Wins: 0 / 0</span>
+    </p>
+    <p class="eq-big" id="crashEqs"></p>
+    <div id="crashGraph"></div>
+    <p id="crashMsg" style="min-height:1.6em;font-weight:600;color:#5b21b6"></p>
+    <div class="tip"><strong>Try these missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Score <strong>3 wins in a row</strong>. 🔥</li>
+        <li>Level-up: before you click, work out x by algebra (set the two right-hand sides equal) — then click to confirm you were right.</li>
+        <li>Parallel radar: when a 🙅 pair appears, say <em>out loud</em> how you knew, before pressing the button. (Hint: compare the two numbers in front of x.)</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> what you just did has a fancy name —
+    <em>solving simultaneous equations</em> — and it scares plenty of Year 11s.
+    You did it by clicking. 😏</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills: one for your eyes, one for your algebra. Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>The full story (with videos and endless practice):
+    <a href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:systems-of-equations" target="_blank">
+    Khan Academy — Systems of equations</a> — that’s the official name for “two rules at once”.
+    And in <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>, type in any two lines
+    and it marks the crossing point for you — brilliant for checking your algebra.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything —
+    “why can’t two straight lines cross twice?” is an excellent question, for instance.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0007-weird-lines.html">← Lesson 7: Weird lines</a>
+    <a href="0009-boss-level.html">Lesson 9: BOSS LEVEL 🏆 →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* ---------- shared helpers ---------- */
+const M = n => Quiz.fmtNum(n).replace(/-/g, '−');                 // pretty minus
+const rhs = (m, c) => Quiz.fmtLine(m, c).slice(4);                // '2x − 1' from 'y = 2x − 1'
+const coefX = k => (k === 1 ? 'x' : k === -1 ? '−x' : `${M(k)}x`);
+
+// '2 × (−3) − 1' style substitution string for y = m·x + c
+function mulStr(m, x, c) {
+  const xs = x < 0 ? `(${M(x)})` : M(x);
+  let s = `${M(m)} × ${xs}`;
+  if (c > 0) s += ` + ${M(c)}`;
+  else if (c < 0) s += ` − ${M(-c)}`;
+  return s;
+}
+
+// Random pair of lines with a guaranteed integer intersection (x0, y0).
+function crashPair() {
+  while (true) {
+    const x0 = Quiz.ri(-4, 4), y0 = Quiz.ri(-4, 4);
+    const m1 = Quiz.rnz(-3, 3);
+    let m2 = Quiz.rnz(-3, 3);
+    while (m2 === m1) m2 = Quiz.rnz(-3, 3);
+    const c1 = y0 - m1 * x0, c2 = y0 - m2 * x0;
+    if (Math.abs(c1) > 8 || Math.abs(c2) > 8) continue;
+    return { x0, y0, m1, c1, m2, c2 };
+  }
+}
+
+// '(2, 3)' / '(2,3)' / ' ( 2 , 3 ) ' → {x, y}; anything else → null
+function parseCoord(s) {
+  const t = String(s).replace(/[()\s]/g, '').replace(/[−–—]/g, '-');
+  const parts = t.split(',');
+  if (parts.length !== 2 || parts[0] === '' || parts[1] === '') return null;
+  const x = Number(parts[0]), y = Number(parts[1]);
+  if (Number.isNaN(x) || Number.isNaN(y)) return null;
+  return { x, y };
+}
+
+function solveExplain(p) {
+  const dm = p.m1 - p.m2, dc = p.c2 - p.c1;
+  const gather = dm === 1
+    ? `<span class="eq">x = ${M(p.x0)}</span>`
+    : `<span class="eq">${coefX(dm)} = ${M(dc)}</span>, so x = ${M(p.x0)}`;
+  return `Set the two right-hand sides equal: <span class="eq">${rhs(p.m1, p.c1)} = ${rhs(p.m2, p.c2)}</span>. ` +
+    `Gather the x’s on one side: ${gather}. ` +
+    `Substitute back into either line: y = ${mulStr(p.m1, p.x0, p.c1)} = ${M(p.y0)}. ` +
+    `Crash site: (${M(p.x0)}, ${M(p.y0)}).`;
+}
+
+/* ---------- concept graphs ---------- */
+const mg = Graph.create('meetGraph', { width: 420, height: 420 });
+mg.line(2, -1, { color: '#7c3aed', width: 4, label: 'y = 2x − 1' });
+mg.line(-1, 5, { color: '#ec4899', width: 4, label: 'y = −x + 5' });
+mg.point(2, 3, { color: '#f59e0b', size: 7, label: '(2, 3)' });
+
+const pg = Graph.create('parallelGraph', { width: 420, height: 420 });
+pg.line(2, 1, { color: '#7c3aed', width: 4, label: 'y = 2x + 1' });
+pg.line(2, -3, { color: '#ec4899', width: 4, label: 'y = 2x − 3' });
+
+/* ---------- crash detector ---------- */
+const cg = Graph.create('crashGraph', { width: 420, height: 420 });
+const crashEqs = document.getElementById('crashEqs');
+const crashMsg = document.getElementById('crashMsg');
+const crashScore = document.getElementById('crashScore');
+let cur = null, solved = false, missed = false, wins = 0, attempts = 0;
+
+function say(html) { crashMsg.innerHTML = html; }
+
+function finishRound(win) {
+  attempts++;
+  if (win) wins++;
+  crashScore.textContent = `Wins: ${wins} / ${attempts}`;
+}
+
+function newPair() {
+  solved = false; missed = false;
+  if (Math.random() < 0.25) {
+    const m = Quiz.rnz(-3, 3);
+    const c1 = Quiz.ri(-8, 8);
+    let c2 = Quiz.ri(-8, 8);
+    while (c2 === c1) c2 = Quiz.ri(-8, 8);
+    cur = { parallel: true, m1: m, c1, m2: m, c2 };
+  } else {
+    cur = Object.assign({ parallel: false }, crashPair());
+  }
+  cg.clear();
+  cg.line(cur.m1, cur.c1, { color: '#7c3aed', width: 4 });
+  cg.line(cur.m2, cur.c2, { color: '#ec4899', width: 4 });
+  crashEqs.innerHTML =
+    `<span style="color:#7c3aed">${Quiz.fmtLine(cur.m1, cur.c1)}</span>` +
+    ` &nbsp;&nbsp; <span style="color:#ec4899">${Quiz.fmtLine(cur.m2, cur.c2)}</span>`;
+  say('Click the crash point… or call “never”. 🕵️‍♀️');
+}
+
+cg.onClick((x, y) => {
+  if (!cur || solved) return;
+  if (cur.parallel) {
+    missed = true;
+    say('🤔 Same gradient… do they ever cross? (Compare the two numbers in front of x.)');
+    return;
+  }
+  if (x === cur.x0 && y === cur.y0) {
+    solved = true;
+    cg.point(cur.x0, cur.y0, { color: '#f59e0b', size: 7, label: `(${cur.x0}, ${cur.y0})` });
+    Quiz.confetti();
+    finishRound(!missed);
+    say(`💥 Found it: (${cur.x0}, ${cur.y0})! The one point that obeys BOTH rules.`);
+  } else {
+    missed = true;
+    say('Not quite — follow both lines with your finger… where do they touch?');
+  }
+}, 1);
+
+document.getElementById('neverBtn').addEventListener('click', () => {
+  if (!cur || solved) return;
+  if (cur.parallel) {
+    solved = true;
+    Quiz.confetti();
+    finishRound(!missed);
+    say(`🙅 Spot on — both have gradient ${M(cur.m1)} with different intercepts. Parallel: zero crashes!`);
+  } else {
+    missed = true;
+    say('They DO meet — different gradients always crash somewhere. Keep looking. 👀');
+  }
+});
+
+document.getElementById('newPairBtn').addEventListener('click', newPair);
+newPair();
+
+/* ---------- drill 1: read the crash site off the graph ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Read the crash site 🗺️',
+  intro: 'Two lines, no marker. Find the crossing with your eyes (fingers on the screen allowed).',
+  rounds: 8,
+  generate() {
+    const p = crashPair();
+    const pt = (x, y) => `(${M(x)}, ${M(y)})`;
+    const correct = pt(p.x0, p.y0);
+    const seen = new Set([correct]);
+    const wrongs = [];
+    const cands = [[p.y0, p.x0]].concat(
+      Quiz.shuffle([[p.x0 + 1, p.y0], [p.x0 - 1, p.y0], [p.x0, p.y0 + 1], [p.x0, p.y0 - 1]]));
+    for (const [wx, wy] of cands) {
+      const k = pt(wx, wy);
+      if (!seen.has(k)) { seen.add(k); wrongs.push(k); }
+      if (wrongs.length === 3) break;
+    }
+    return {
+      prompt(el) {
+        el.innerHTML = 'Where do these lines cross?';
+        const gg = Graph.create(el, { width: 320, height: 320 });
+        gg.line(p.m1, p.c1, { color: '#7c3aed', width: 4 });
+        gg.line(p.m2, p.c2, { color: '#ec4899', width: 4 });
+      },
+      choices: [{ html: correct, correct: true }, ...wrongs.map(w => ({ html: w }))],
+      explain: `Check the point in both rules: purple gives y = ${mulStr(p.m1, p.x0, p.c1)} = ${M(p.y0)} ✓ ` +
+        `and pink gives y = ${mulStr(p.m2, p.x0, p.c2)} = ${M(p.y0)} ✓. ` +
+        `Only ${correct} keeps both equations happy — and watch the order: x first, then y.`,
+    };
+  },
+});
+
+/* ---------- drill 2: pure algebra, parallel traps included ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Algebra crash test 🧮',
+  intro: 'No graph this time — set the two right-hand sides equal and solve. ' +
+    'Stay alert: some pairs are parallel. Type the point like <span class="eq">(2, 3)</span>, ' +
+    'or <strong>never</strong> if they never cross.',
+  rounds: 8,
+  generate() {
+    if (Math.random() < 0.25) {
+      const m = Quiz.rnz(-3, 3);
+      const c1 = Quiz.ri(-8, 8);
+      let c2 = Quiz.ri(-8, 8);
+      while (c2 === c1) c2 = Quiz.ri(-8, 8);
+      return {
+        prompt: `Where do these lines cross?
+          <div class="eq-big">${Quiz.fmtLine(m, c1)} &nbsp;&nbsp;and&nbsp;&nbsp; ${Quiz.fmtLine(m, c2)}</div>
+          <p style="font-size:.9rem;color:#8b7fb8">Type the point like (2, 3) — or “never” if they never cross.</p>`,
+        input: {
+          placeholder: '(x, y) or never',
+          check: s => /^(never|no|none|parallel)$/.test(String(s).trim().toLowerCase()),
+          answer: 'never',
+        },
+        explain: `Both lines have gradient ${M(m)} — identical steepness, different intercepts ` +
+          `(${M(c1)} and ${M(c2)}). They’re parallel, so they never meet. ` +
+          `(Try the algebra: the x’s cancel and you’re left with ${M(c1)} = ${M(c2)} — nonsense means “never”.)`,
+      };
+    }
+    const p = crashPair();
+    return {
+      prompt: `Where do these lines cross?
+        <div class="eq-big">${Quiz.fmtLine(p.m1, p.c1)} &nbsp;&nbsp;and&nbsp;&nbsp; ${Quiz.fmtLine(p.m2, p.c2)}</div>
+        <p style="font-size:.9rem;color:#8b7fb8">Type the point like (2, 3) — or “never” if they never cross.</p>`,
+      input: {
+        placeholder: '(x, y) or never',
+        check: s => { const q = parseCoord(s); return !!q && Quiz.approx(q.x, p.x0) && Quiz.approx(q.y, p.y0); },
+        answer: `(${M(p.x0)}, ${M(p.y0)})`,
+      },
+      explain: solveExplain(p),
+    };
+  },
+});
+</script>
+</body>
+</html>

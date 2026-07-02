@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6 · Undercover Lines: Rearranging 🥸</title>
+<link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Linear Graphs Adventure · Lesson 6 of 9</p>
+    <h1>Undercover Lines: Rearranging 🥸</h1>
+    <p>Not every line politely introduces itself as y&nbsp;=&nbsp;mx&nbsp;+&nbsp;c. Some arrive in disguise. Your job: unmask them.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>Equations like <span class="eq">2y = 6x + 8</span>, <span class="eq">y + 2x = 7</span> and
+    <span class="eq">2x + 3y = 12</span> are all straight lines — they’re just <strong>y&nbsp;=&nbsp;mx&nbsp;+&nbsp;c wearing a fake moustache</strong>.
+    By the end you’ll rearrange any of them so that <strong>y is alone on the left</strong> — and only <em>then</em>
+    read off <span class="m-color"><strong>m</strong></span> and <span class="c-color"><strong>c</strong></span>. Reading them off too early is the #1 exam trap. Not you, though. 😏</p>
+  </div>
+
+  <div class="card">
+    <h2>The golden rule ⚖️</h2>
+    <p>An equation is a set of scales: <strong>whatever you do to one side, do to the other</strong>,
+    and it stays balanced. Your mission never changes: <strong>get y alone on the left</strong>.
+    Everything else follows from that one idea.</p>
+
+    <p><strong>Example 1 — something stuck to the y? Move it across.</strong></p>
+    <ul>
+      <li><span class="eq">y − 4 = 3x</span> &nbsp;→&nbsp; add 4 to <em>both</em> sides &nbsp;→&nbsp; <span class="eq">y = 3x + 4</span></li>
+      <li>Now read off: <span class="m-color"><strong>m = 3</strong></span>, <span class="c-color"><strong>c = 4</strong></span>. ✅</li>
+    </ul>
+
+    <p><strong>Example 2 — a number multiplying the y? Divide it away.</strong></p>
+    <ul>
+      <li><span class="eq">2y = 6x + 8</span> &nbsp;→&nbsp; divide <em>everything</em> by 2 &nbsp;→&nbsp; <span class="eq">y = 3x + 4</span></li>
+      <li>Same line as Example 1, in a different disguise! <span class="m-color"><strong>m = 3</strong></span>, <span class="c-color"><strong>c = 4</strong></span>.</li>
+    </ul>
+    <div class="tip">⚠️ <strong>The classic mistake:</strong> dividing only <em>one</em> term.
+    <span class="eq">2y = 6x + 8</span> does <strong>not</strong> become <span class="eq">y = 3x + 8</span> —
+    the 8 must be divided by 2 as well. Every. Single. Term. If you halve one side of the scales,
+    you halve <em>all</em> of the other side too.</div>
+
+    <p><strong>Example 3 — an x-term hanging around on the left? Subtract it off.</strong></p>
+    <ul>
+      <li><span class="eq">y + 2x = 7</span> &nbsp;→&nbsp; subtract 2x from <em>both</em> sides &nbsp;→&nbsp; <span class="eq">y = −2x + 7</span></li>
+      <li>Read off: <span class="m-color"><strong>m = −2</strong></span>, <span class="c-color"><strong>c = 7</strong></span>.</li>
+    </ul>
+    <p>And if you wrote <span class="eq">y = 7 − 2x</span> instead? <strong>Also correct!</strong>
+    It’s the exact same line — the terms are just written in a different order.
+    Neither version is “wrong”; m&nbsp;=&nbsp;−2 either way.</p>
+
+    <div class="tip">🕵️ <strong>The order trap:</strong> in <span class="eq">y = 7 − 2x</span>, the gradient is
+    <span class="m-color"><strong>m = −2</strong></span> and the intercept is <span class="c-color"><strong>c = 7</strong></span>.
+    The order the terms are <em>written</em> in doesn’t matter one bit — <strong>the number glued to the x is always m</strong>
+    (sign included!), and the lonely number is always c.</div>
+  </div>
+
+  <div class="card">
+    <h2>🥸 Unmask the line</h2>
+    <p>Hit the button and I’ll deal you a random line in disguise. <strong>Before</strong> you click
+    “Next step”, try to predict the unmasked <span class="eq">y = mx + c</span> in your head — then reveal and check.</p>
+    <p style="text-align:center">
+      <button class="btn" id="dealBtn">Deal me a disguise 🎲</button>
+      <button class="btn secondary" id="stepBtn" disabled>Next step 👉</button>
+    </p>
+    <div id="maskSteps" style="min-height:40px"></div>
+    <div id="maskGraph"></div>
+    <div class="tip"><strong>Try these missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Deal until you get a <strong>2y = …</strong> or <strong>3y = …</strong> disguise. Predict the answer, then check the constant got divided too.</li>
+        <li>Deal until you get a <strong>y + □x = …</strong> one. Which way does the sign of m flip?</li>
+        <li>Get <strong>three predictions right in a row</strong> before revealing. That’s unmasking mastery. 🏆</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> every single disguise here is beaten by <em>one</em> move —
+    add, subtract, divide or multiply <strong>both whole sides</strong>. If you can spot which move, the exam question is already dead.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills: first <em>spot</em> the right unmasking, then do the full undercover work yourself. Fresh questions every replay.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>Corbettmaths has a lovely short video plus practice questions on exactly this —
+    <a href="https://corbettmaths.com/?s=y%3Dmx%2Bc" target="_blank">search results for y&nbsp;=&nbsp;mx&nbsp;+&nbsp;c on Corbettmaths</a>
+    (the “y=mx+c Video” and “Equation of a Line Practice Questions” are the good ones).
+    <a href="https://www.drfrost.org" target="_blank">Dr&nbsp;Frost&nbsp;Maths</a> also has stacks of worked
+    questions on rearranging into <span class="eq">y = mx + c</span> if you want an extra round.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) anything — “why does dividing only one term
+    break the equation?” is a cracking question to start with.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0005-table-to-equation.html">← Lesson 5: Table to equation</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0007-weird-lines.html">Lesson 7: The weird ones →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js"></script>
+<script src="../assets/quiz.js"></script>
+<script>
+/* ============================================================
+   Shared, DOM-free disguise generator (used by the interactive
+   AND both drills — keep this section free of document/Graph).
+   ============================================================ */
+const MINUS = '−';
+const fm = n => String(n).replace('-', MINUS);                       // pretty minus
+const coefX = n => (n === 1 ? '' : n === -1 ? MINUS : fm(n)) + 'x';  // 3 → '3x', −1 → '−x'
+const plusConst = n => n === 0 ? '' : n > 0 ? ` + ${n}` : ` ${MINUS} ${-n}`;
+
+/* Returns {m, c, k, recipe, display, note, final, explain} where
+   `display` is the disguised equation, `note` is the one balancing
+   move that unmasks it, and `final` is Quiz.fmtLine(m, c). */
+function makeDisguise(recipes) {
+  const recipe = Quiz.pick(recipes || ['A', 'B', 'C', 'D']);
+  const k = Quiz.pick([2, 3]);
+  let m = Quiz.rnz(-4, 4);
+  let c = Quiz.rnz(-6, 6);          // nonzero keeps every disguise genuinely disguised
+  let display, note;
+
+  if (recipe === 'A') {             // y − c = mx   (shown with tidy signs)
+    display = c > 0 ? `y ${MINUS} ${c} = ${coefX(m)}` : `y + ${-c} = ${coefX(m)}`;
+    note = c > 0 ? `Add ${c} to both sides` : `Subtract ${-c} from both sides`;
+  } else if (recipe === 'B') {      // ky = (km)x + (kc)
+    display = `${k}y = ${coefX(k * m)}${plusConst(k * c)}`;
+    note = `Divide EVERYTHING by ${k} — both terms on the right`;
+  } else if (recipe === 'C' || recipe === 'D') {   // y + ax = c  /  ax + y = c, a = −m
+    const a = -m, A = Math.abs(a), Ax = (A === 1 ? '' : A) + 'x';
+    display = recipe === 'C'
+      ? `y ${a > 0 ? '+' : MINUS} ${Ax} = ${fm(c)}`
+      : `${coefX(a)} + y = ${fm(c)}`;
+    note = a > 0 ? `Subtract ${Ax} from both sides` : `Add ${Ax} to both sides`;
+  } else {                          // E: y/k = (m/k)x + (c/k) — built integer-clean
+    m = k * (k === 2 ? Quiz.rnz(-2, 2) : Quiz.rnz(-1, 1));
+    c = k * Quiz.rnz(-2, 2);
+    display = `y/${k} = ${coefX(m / k)}${plusConst(c / k)}`;
+    note = `Multiply EVERYTHING by ${k}`;
+  }
+
+  const final = Quiz.fmtLine(m, c);
+  const explain = `Start with <span class="eq">${display}</span>. ${note} → ` +
+    `<span class="eq">${final}</span>. Now y is alone, so read off: ` +
+    `<span class="m-color"><strong>m = ${fm(m)}</strong></span>, ` +
+    `<span class="c-color"><strong>c = ${fm(c)}</strong></span>.`;
+  return { m, c, k, recipe, display, note, final, explain };
+}
+
+/* Drill 1: correct answer + three classic-mistake distractors, deduped. */
+function genDrill1() {
+  const d = makeDisguise(['A', 'B', 'C', 'D']);
+  const correct = d.final;
+  const candidates = [
+    Quiz.fmtLine(-d.m, d.c),                                     // sign error on m
+    d.recipe === 'B' ? Quiz.fmtLine(d.m, d.k * d.c)              // forgot to divide the constant
+                     : Quiz.fmtLine(d.m, -d.c),                  // sign error on c
+    Quiz.fmtLine(d.c, d.m),                                      // swapped m and c
+    Quiz.fmtLine(d.m, -d.c), Quiz.fmtLine(-d.m, -d.c),           // fallbacks (dedupe fillers)
+    Quiz.fmtLine(d.m + 1, d.c), Quiz.fmtLine(d.m, d.c + 1),
+  ];
+  const wrongs = new Set();
+  for (const w of candidates) {
+    if (w !== correct) wrongs.add(w);
+    if (wrongs.size === 3) break;
+  }
+  return {
+    prompt: `Which is the correct rearrangement of <span class="eq">${d.display}</span> into y = mx + c form?`,
+    choices: [{ html: `<span class="eq">${correct}</span>`, correct: true },
+      ...[...wrongs].map(w => ({ html: `<span class="eq">${w}</span>` }))],
+    explain: d.explain,
+  };
+}
+
+/* Drill 2: full undercover work — she types the unmasked equation. */
+function genDrill2() {
+  const d = makeDisguise(['A', 'B', 'C', 'D']);
+  const { m, c } = d;
+  return {
+    prompt: `Rearrange <span class="eq">${d.display}</span> into y = mx + c form.`,
+    input: { placeholder: 'y = …',
+             check: s => Quiz.checkLine(s, { m, c }),
+             answer: d.final },
+    explain: d.explain,
+  };
+}
+
+/* ============================================================
+   DOM below — interactive + drill mounting.
+   ============================================================ */
+const maskG = Graph.create('maskGraph', { width: 320, height: 320, labelEvery: 2 });
+const stepsEl = document.getElementById('maskSteps');
+const dealBtn = document.getElementById('dealBtn');
+const stepBtn = document.getElementById('stepBtn');
+let mask = null, maskStage = 0;
+
+function deal() {
+  mask = makeDisguise(['A', 'B', 'C', 'D', 'E']);
+  maskStage = 0;
+  maskG.clear();
+  stepsEl.innerHTML =
+    `<p style="text-align:center;margin:6px 0 2px;color:#8b7fb8;font-weight:700">The disguise:</p>
+     <div class="eq-big">${mask.display}</div>`;
+  stepBtn.disabled = false;
+  stepBtn.textContent = 'Next step 👉';
+}
+
+function step() {
+  if (!mask) return;
+  maskStage++;
+  if (maskStage === 1) {
+    stepsEl.insertAdjacentHTML('beforeend',
+      `<p style="text-align:center;margin:6px 0 2px"><strong>👉 ${mask.note}:</strong></p>
+       <div class="eq-big" style="background:#f0fdf4;border:2px solid #16a34a">${mask.final}</div>`);
+    stepBtn.textContent = 'Read it off 🔍';
+  } else {
+    stepsEl.insertAdjacentHTML('beforeend',
+      `<p style="text-align:center"><strong>Unmasked!</strong> y is alone, so
+       <span class="m-color"><strong>m = ${fm(mask.m)}</strong></span> and
+       <span class="c-color"><strong>c = ${fm(mask.c)}</strong></span> — here’s the line it was hiding. 🥸✨</p>`);
+    maskG.clear();
+    maskG.line(mask.m, mask.c, { color: '#7c3aed', width: 4, label: mask.final });
+    maskG.point(0, mask.c, { color: '#0d9488' });
+    stepBtn.disabled = true;
+  }
+}
+
+dealBtn.addEventListener('click', deal);
+stepBtn.addEventListener('click', step);
+
+/* ---------- drills ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Spot the correct rearrangement 🎭',
+  intro: 'One of the four is the honest y = mx + c version of the disguise. The other three each contain a classic mistake — sign slips, half-divided equations, swapped m and c…',
+  rounds: 8,
+  generate: genDrill1,
+});
+
+Quiz.create('drill2', {
+  title: 'Drill 2 · Full undercover work 🕶️',
+  intro: 'No multiple choice safety net now — rearrange it yourself and type the y = mx + c form. (Writing the terms in a different order is fine; the checker knows the same line when it sees it.)',
+  rounds: 8,
+  generate: genDrill2,
+});
+</script>
+</body>
+</html>
