@@ -311,9 +311,12 @@ const Quiz = (() => {
         const inp = document.createElement('input');
         inp.className = 'quiz-answer';
         inp.placeholder = prefix ? '…' : (q.input.placeholder || 'your answer…');
-        // inputmode="none" keeps the caret but suppresses the phone's OS
-        // keyboard so the big on-screen pad below is the way to type.
+        // The big on-screen pad is the only way to type, so suppress the phone's
+        // OS keyboard. readOnly is the reliable guarantee on Android (inputmode
+        // alone isn't always honoured); focus still shows a caret and the pad
+        // writes into the field programmatically.
         inp.inputMode = 'none';
+        inp.readOnly = true;
         inp.autocapitalize = 'off'; inp.autocomplete = 'off'; inp.spellcheck = false;
         field.appendChild(inp);
         bodyEl.appendChild(field);
