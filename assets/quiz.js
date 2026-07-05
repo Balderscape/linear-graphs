@@ -311,12 +311,15 @@ const Quiz = (() => {
         const inp = document.createElement('input');
         inp.className = 'quiz-answer';
         inp.placeholder = prefix ? '…' : (q.input.placeholder || 'your answer…');
-        // The big on-screen pad is the only way to type, so suppress the phone's
-        // OS keyboard. readOnly is the reliable guarantee on Android (inputmode
-        // alone isn't always honoured); focus still shows a caret and the pad
-        // writes into the field programmatically.
+        // Suppress the phone's OS keyboard so the big on-screen pad is the way
+        // to type. On touch devices readOnly is the reliable guarantee (Android
+        // doesn't always honour inputmode=none). On a desktop (fine pointer) we
+        // leave the field editable so a physical keyboard still works — the pad
+        // and physical typing then both drive the same field.
         inp.inputMode = 'none';
-        inp.readOnly = true;
+        const touchPrimary = typeof window !== 'undefined' && window.matchMedia
+          && window.matchMedia('(pointer: coarse)').matches;
+        if (touchPrimary) inp.readOnly = true;
         inp.autocapitalize = 'off'; inp.autocomplete = 'off'; inp.spellcheck = false;
         field.appendChild(inp);
         bodyEl.appendChild(field);
