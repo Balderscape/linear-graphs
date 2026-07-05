@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 11 · Parabolas: y = ax² + k</title>
+<link rel="stylesheet" href="../assets/course.css?v=4">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 2 of 3</p>
+    <h1>Parabolas: y&nbsp;=&nbsp;ax²&nbsp;+&nbsp;k 🥣</h1>
+    <p>The shape of a thrown ball, a satellite dish, a water fountain. Two numbers again —
+    one bends it, one lifts it.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>You’ll own <span class="eq">y = ax² + k</span>: how <strong class="m-color">a</strong> makes the
+    U <em>fatter, skinnier, or flipped upside-down</em>, and how <strong class="c-color">k</strong>
+    slides the whole thing <em>up and down</em>. No factorising, no roots — just the shape.</p>
+  </div>
+
+  <div class="card">
+    <h2>Meet y = x²</h2>
+    <p>The rule is “square your <em>x</em>.” Squaring always gives a <strong>positive</strong> answer
+    (a negative times a negative is positive), so the curve sits <em>above</em> the x-axis and makes a
+    symmetrical <strong>U</strong> called a <strong>parabola</strong>.</p>
+    <table class="vals">
+      <tr><th>x</th><td>−3</td><td>−2</td><td>−1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><th>y = x²</th><td>9</td><td>4</td><td>1</td><td>0</td><td>1</td><td>4</td><td>9</td></tr>
+    </table>
+    <p>Notice the <strong>mirror symmetry</strong>: −3 and +3 both give 9. The bottom of the U — here
+    the point <span class="eq">(0, 0)</span> — is called the <strong>vertex</strong> (the turning point).</p>
+  </div>
+
+  <div class="card">
+    <h2>What the two numbers do</h2>
+    <ul>
+      <li><strong class="m-color">a</strong> — the <strong>stretch</strong>. Big
+      <strong class="m-color">a</strong> (like 3) → tall &amp; <em>skinny</em>. Small
+      <strong class="m-color">a</strong> (like ½) → short &amp; <em>fat</em>. And if
+      <strong class="m-color">a</strong> is <strong>negative</strong>, the U <em>flips upside-down</em>
+      into a ∩ (a frown 🙁).</li>
+      <li><strong class="c-color">k</strong> — the <strong>lift</strong>. It just slides the whole
+      parabola straight up (if <strong class="c-color">k</strong> &gt; 0) or down (if
+      <strong class="c-color">k</strong> &lt; 0). The vertex moves to <span class="eq">(0, k)</span>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🕹️ The parabola machine</h2>
+    <p>Play. Fatten it, flip it, lift it.</p>
+    <div id="playSliders"></div>
+    <p class="eq-big" id="playEq"></p>
+    <div id="playGraph"></div>
+    <div class="tip"><strong>Missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Make the <strong>skinniest</strong> U you can, then the <strong>fattest</strong>.
+        (Which slider? Which direction?)</li>
+        <li>Flip it into a <strong>frown</strong> ∩. What did you do to <strong class="m-color">a</strong>?</li>
+        <li>Lift the vertex to <strong>(0, 4)</strong> without touching the pink slider.</li>
+        <li>Make a frown whose peak is at <strong>(0, 3)</strong>.</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> <strong class="m-color">a</strong> bends (size = skinny/fat,
+    sign = smile/frown); <strong class="c-color">k</strong> lifts (the vertex sits at
+    <span class="eq">(0, k)</span>).</div>
+  </div>
+
+  <div class="card">
+    <h2>🚀 Bonus (advanced — just a peek)</h2>
+    <p>There’s a third move: <span class="eq">y = (x + h)²</span> slides the parabola <em>left and right</em>.
+    You don’t need it for Year 10, but it’s fun to see. Open
+    <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>, type
+    <code>y = (x + h)^2</code>, add a slider for <code>h</code>, and drag — watch the whole U walk sideways.
+    (Sneaky bit: <code>+ h</code> moves it <em>left</em>, not right!)</p>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills. Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p><a href="https://corbettmaths.com/2019/09/02/quadratic-graphs/" target="_blank">Corbettmaths —
+    quadratic graphs</a> for a video, and <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>
+    for endless play: type <code>y = a x^2 + k</code> and drag the sliders.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude — “why does squaring make it symmetrical?” is a great one.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0010-inverse-relationships.html">← Lesson 10: Inverse</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0012-exponentials.html">Lesson 12: Exponentials →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js?v=4"></script>
+<script src="../assets/quiz.js?v=4"></script>
+<script>
+const PURPLE = '#7c3aed', TEAL = '#0d9488';
+
+/* ---------- shared formatting ---------- */
+function aTxt(a) { return a === 1 ? '' : a === -1 ? '−' : Quiz.fmtNum(a).replace('-', '−'); }
+function quadPlain(a, k) {                       // "y = 2x² − 3"
+  let s = `y = ${aTxt(a)}x²`;
+  if (k > 0) s += ` + ${k}`; else if (k < 0) s += ` − ${-k}`;
+  return s;
+}
+function quadColour(a, k) {                      // coloured version for the playground
+  let s = `y = <span class="m-color">${aTxt(a)}x²</span>`;
+  if (k > 0) s += ` <span class="c-color">+ ${k}</span>`;
+  else if (k < 0) s += ` <span class="c-color">− ${-k}</span>`;
+  return s;
+}
+
+/* ---------- playground ---------- */
+const g = Graph.create('playGraph', { xmin: -5, xmax: 5, ymin: -10, ymax: 10, width: 420, height: 420 });
+const eqEl = document.getElementById('playEq');
+let aS, kS;
+function redraw() {
+  g.clear();
+  const a = aS.value, k = kS.value;
+  g.curve(x => a * x * x + k, { color: PURPLE, width: 4 });
+  g.point(0, k, { color: TEAL, label: 'vertex' });
+  eqEl.innerHTML = quadColour(a, k);
+}
+aS = Graph.slider('playSliders', { label: 'a (stretch)', min: -3, max: 3, step: 0.5, value: 1,
+  color: '#ec4899', fmt: v => Quiz.fmtNum(v), onInput: redraw });
+kS = Graph.slider('playSliders', { label: 'k (lift)', min: -6, max: 6, step: 1, value: 0,
+  color: '#0d9488', onInput: redraw });
+redraw();
+
+/* ---------- drill 1: match the parabola to its equation ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Which parabola is this? 👀',
+  intro: 'Smile or frown? Skinny or fat? And where’s the vertex? Those three reads give you a and k.',
+  rounds: 8,
+  generate() {
+    const a = Quiz.pick([0.5, 1, 2, -0.5, -1, -2]);
+    const k = Quiz.ri(-4, 4);
+    const right = quadPlain(a, k);
+    const distract = new Set();
+    for (const [da, dk] of [[-a, k], [a, -k], [a, k + 3], [a > 0 ? a * 2 : a / 2, k], [-a, -k]]) {
+      const s = quadPlain(da, dk);
+      if (s !== right) distract.add(s);
+      if (distract.size === 3) break;
+    }
+    return {
+      prompt(el) {
+        el.innerHTML = 'Which equation matches this parabola?';
+        const gg = Graph.create(el, { xmin: -5, xmax: 5, ymin: -10, ymax: 10, width: 300, height: 300 });
+        gg.curve(x => a * x * x + k, { color: PURPLE, width: 3.5 });
+        gg.point(0, k, { color: TEAL });
+      },
+      choices: [{ html: `<span class="eq">${right}</span>`, correct: true },
+        ...[...distract].map(d => ({ html: `<span class="eq">${d}</span>` }))],
+      explain: `It’s a ${a > 0 ? 'smile (U), so a is positive' : 'frown (∩), so a is negative'}, ` +
+        `${Math.abs(a) > 1 ? 'skinny → |a| bigger than 1' : Math.abs(a) < 1 ? 'fat → |a| less than 1' : 'the standard width → |a| = 1'}, ` +
+        `and the teal vertex sits at (0, ${k}) → k = ${k}.`,
+    };
+  },
+});
+
+/* ---------- drill 2: write the equation ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Name that parabola ✍️',
+  intro: 'Read the shape and type the equation. Use the x² key. The y = is already there for you.',
+  rounds: 8,
+  generate() {
+    const a = Quiz.pick([1, 2, 3, -1, -2, -3]);
+    const k = Quiz.ri(-5, 5);
+    return {
+      prompt(el) {
+        el.innerHTML = 'What’s the equation of this parabola?';
+        const gg = Graph.create(el, { xmin: -5, xmax: 5, ymin: -10, ymax: 10, width: 300, height: 300 });
+        gg.curve(x => a * x * x + k, { color: PURPLE, width: 3.5 });
+        gg.point(0, k, { color: TEAL });
+      },
+      input: {
+        keypad: 'quad',
+        placeholder: '…',
+        check: s => Quiz.checkQuad(s, { a, k }),
+        answer: quadPlain(a, k),
+      },
+      explain: `Vertex at (0, ${k}) gives k = ${k}. It’s ${a > 0 ? 'a smile' : 'a frown, so a is negative'} ` +
+        `and its width matches a = ${a}. Reading x = 1: y = ${a} ${k >= 0 ? '+ ' + k : '− ' + (-k)} = ${a + k}, which checks out.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

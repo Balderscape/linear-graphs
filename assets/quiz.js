@@ -111,6 +111,66 @@ const Quiz = (() => {
     return p.type === 'line' && approx(p.m, expected.m) && approx(p.c, expected.c);
   }
 
+  // strip to a bare RHS: lowercase, no spaces, unified minus/times, y= removed
+  function rhsOf(raw) {
+    let s = String(raw == null ? '' : raw).toLowerCase()
+      .replace(/\s+/g, '').replace(/[−–—]/g, '-').replace(/\*/g, '');
+    if (!s.startsWith('y=')) return null;
+    return s.slice(2);
+  }
+
+  // Parabola  y = a x² + k   (accepts x², x^2, xx for the squared term)
+  function checkQuad(str, exp) {
+    let rhs = rhsOf(str);
+    if (rhs == null) return false;
+    rhs = rhs.replace(/x\^2/g, 'q').replace(/x²/g, 'q').replace(/xx/g, 'q');
+    if (/x/.test(rhs)) return false;                 // no lone/linear x at this level
+    if (!rhs || /[+-]$/.test(rhs)) return false;
+    const terms = rhs.match(/[+-]?[^+-]+/g);
+    if (!terms) return false;
+    let a = 0, k = 0;
+    for (let t of terms) {
+      let sign = 1;
+      if (t[0] === '+') t = t.slice(1);
+      else if (t[0] === '-') { sign = -1; t = t.slice(1); }
+      if (!t) return false;
+      if (t.includes('q')) {
+        const pre = t.replace('q', '');
+        const coef = pre === '' ? 1 : evalNum(pre);
+        if (coef == null) return false;
+        a += sign * coef;
+      } else {
+        const v = evalNum(t);
+        if (v == null) return false;
+        k += sign * v;
+      }
+    }
+    return approx(a, exp.a) && approx(k, exp.k);
+  }
+
+  // Inverse / reciprocal  y = a / x
+  function checkRecip(str, exp) {
+    const rhs = rhsOf(str);
+    if (rhs == null) return false;
+    const m = rhs.match(/^(-?)([\d./]*)\/x$/);
+    if (!m) return false;
+    let a = m[2] === '' ? 1 : evalNum(m[2]);
+    if (a == null) return false;
+    if (m[1] === '-') a = -a;
+    return approx(a, exp.a);
+  }
+
+  // Exponential  y = b^x   (accepts 2^x, 0.5^x, (1/2)^x)
+  function checkExp(str, exp) {
+    const rhs = rhsOf(str);
+    if (rhs == null) return false;
+    const m = rhs.match(/^\(?([\d./]+)\)?\^x$/);
+    if (!m) return false;
+    const b = evalNum(m[1]);
+    if (b == null) return false;
+    return approx(b, exp.b);
+  }
+
   /* ---------- confetti ---------- */
   const EMOJI = ['🎉', '✨', '🌟', '💜', '💖', '🎊', '⭐', '🥳'];
   function confetti(n = 26) {
@@ -160,7 +220,39 @@ const Quiz = (() => {
       ['4', '5', '6', { t: '⌫', act: 'back' }],
       ['1', '2', '3', '0'],
     ],
+    // Parabolas  y = a x² + k
+    quad: [
+      ['7', '8', '9', { t: 'x²', v: 'x²' }],
+      ['4', '5', '6', { t: '−', v: '-' }],
+      ['1', '2', '3', { t: '+', v: '+' }],
+      [{ t: '.', v: '.' }, '0', { t: '⌫', act: 'back' }],
+    ],
+    // Inverse / reciprocal  y = a / x
+    recip: [
+      ['7', '8', '9', { t: 'x', v: 'x' }],
+      ['4', '5', '6', { t: '∕', v: '/' }],
+      ['1', '2', '3', { t: '−', v: '-' }],
+      [{ t: '.', v: '.' }, '0', { t: '⌫', act: 'back' }],
+    ],
+    // Plain number answer (evaluate y, read off a value) — no "y =" prefix
+    num: [
+      ['7', '8', '9', { t: '−', v: '-' }],
+      ['4', '5', '6', { t: '∕', v: '/' }],
+      ['1', '2', '3', { t: '.', v: '.' }],
+      [{ t: '0', v: '0' }, { t: '⌫', act: 'back' }],
+    ],
+    // Exponentials  y = b^x
+    exp: [
+      [{ t: 'x', v: 'x' }, { t: '^', v: '^' }, { t: '(', v: '(' }, { t: ')', v: ')' }],
+      ['7', '8', '9', { t: '∕', v: '/' }],
+      ['4', '5', '6', { t: '−', v: '-' }],
+      ['1', '2', '3', { t: '.', v: '.' }],
+      [{ t: '0', v: '0' }, { t: '⌫', act: 'back' }],
+    ],
   };
+
+  // Modes whose answers are "y = …", so the "y =" prefix is locked in for them.
+  const YEQ_MODES = new Set(['line', 'quad', 'recip', 'exp']);
 
   const normKey = k => (typeof k === 'string' ? { t: k, v: k } : k);
 
@@ -175,7 +267,7 @@ const Quiz = (() => {
 
   function keypadPrefix(input, mode) {
     if (input.prefix != null) return input.prefix;
-    return mode === 'line' ? 'y = ' : '';
+    return YEQ_MODES.has(mode) ? 'y = ' : '';
   }
 
   function keypadRows(mode, input) {
@@ -429,6 +521,7 @@ const Quiz = (() => {
     return { restart: start };
   }
 
-  return { create, parseLine, checkLine, fmtLine, fmtNum, ri, rnz, pick, shuffle, approx, confetti,
+  return { create, parseLine, checkLine, checkQuad, checkRecip, checkExp,
+    fmtLine, fmtNum, ri, rnz, pick, shuffle, approx, confetti,
     keypadMode, keypadPrefix, keypadRows };
 })();

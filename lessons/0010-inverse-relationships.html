@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 10 · Inverse Relationships: y = a/x</title>
+<link rel="stylesheet" href="../assets/course.css?v=4">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 1 of 3</p>
+    <h1>Inverse Relationships: y&nbsp;=&nbsp;a/x 🔀</h1>
+    <p>Straight lines are done. Now the curves — starting with the <em>trade-off</em> curve,
+    where the bigger one thing gets, the smaller the other has to be.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>You’ll meet <span class="eq">y = a/x</span> — a curve in <strong>two pieces</strong> that
+    gets closer and closer to the axes but <em>never touches them</em>. By the end you’ll know why
+    it splits, what <strong class="m-color">a</strong> does, and how to read it.</p>
+  </div>
+
+  <div class="card">
+    <h2>The see-saw rule</h2>
+    <p>Some things trade off against each other. Share a pizza between more people → everyone gets a
+    smaller slice. Drive a fixed distance faster → it takes less time. When one goes <em>up</em>,
+    the other goes <em>down</em> — that’s an <strong>inverse relationship</strong>.</p>
+    <div class="eq-big">y = <span class="m-color">a</span> ÷ x</div>
+    <p>“Pick an <em>x</em>, divide <strong class="m-color">a</strong> by it — that’s your <em>y</em>.”
+    The simplest one is <span class="eq">y = 1/x</span>. Watch what the numbers do:</p>
+    <table class="vals">
+      <tr><th>x</th><td>−4</td><td>−2</td><td>−1</td><td>−½</td><td>½</td><td>1</td><td>2</td><td>4</td></tr>
+      <tr><th>y = 1/x</th><td>−¼</td><td>−½</td><td>−1</td><td>−2</td><td>2</td><td>1</td><td>½</td><td>¼</td></tr>
+    </table>
+    <p>See it? As <em>x</em> gets <strong>big</strong>, <em>y</em> gets <strong>tiny</strong>.
+    As <em>x</em> shrinks toward 0, <em>y</em> <strong>explodes</strong>.</p>
+  </div>
+
+  <div class="card">
+    <h2>Two things that make it weird 👻</h2>
+    <ul>
+      <li><strong>It’s in two separate pieces.</strong> Positive <em>x</em> gives positive <em>y</em>
+      (top-right), negative <em>x</em> gives negative <em>y</em> (bottom-left). The curve can’t cross
+      between them.</li>
+      <li><strong>It never touches the axes.</strong> You can’t divide by 0, so there’s no point at
+      <em>x</em> = 0. And <em>y</em> can get microscopically small but never actually hits 0. Lines a
+      curve sneaks up on but never reaches are called <strong>asymptotes</strong> — here, the two axes.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🕹️ The trade-off machine</h2>
+    <p>Drag <strong class="m-color">a</strong>. Watch the curve swell out, and flip sides when
+    <strong class="m-color">a</strong> goes negative.</p>
+    <div id="playSliders"></div>
+    <p class="eq-big" id="playEq"></p>
+    <div id="playGraph"></div>
+    <div class="tip"><strong>Missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Make <strong class="m-color">a</strong> bigger. Does the curve move <em>closer</em> to the
+        origin or <em>further</em> away?</li>
+        <li>Make <strong class="m-color">a</strong> <strong>negative</strong>. Which two corners does the
+        curve jump to?</li>
+        <li>Can you ever get the curve to touch or cross an axis? (Nope — feel <em>why</em>.)</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> positive <strong class="m-color">a</strong> → top-right
+    &amp; bottom-left. Negative <strong class="m-color">a</strong> → top-left &amp; bottom-right.
+    Bigger <strong class="m-color">a</strong> → curve sits further out.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills. Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>Play with it live on <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a> — type
+    <code>y = a/x</code>, add a slider for <code>a</code>, and drag. For a video walkthrough,
+    <a href="https://corbettmaths.com/2019/09/02/reciprocal-graphs/" target="_blank">Corbettmaths —
+    reciprocal graphs</a> covers exactly this shape.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude (your tutor) — “why can’t it cross the y-axis?”
+    is a brilliant question.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0009-boss-level.html">← Lesson 9: Boss Level</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0011-parabolas.html">Lesson 11: Parabolas →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js?v=4"></script>
+<script src="../assets/quiz.js?v=4"></script>
+<script>
+/* ---------- playground ---------- */
+const PURPLE = '#7c3aed', TEAL = '#0d9488';
+const g = Graph.create('playGraph', { xmin: -8, xmax: 8, ymin: -8, ymax: 8, width: 420, height: 420 });
+const eqEl = document.getElementById('playEq');
+let aS;
+function fmtA(a) { return (a < 0 ? '−' : '') + Math.abs(a); }
+function redraw() {
+  g.clear();
+  const a = aS.value;
+  if (a === 0) { eqEl.innerHTML = 'y = 0 (dividing 0 by anything is just 0!)'; g.hline(0, { color: PURPLE, width: 4 }); return; }
+  g.curve(x => (x === 0 ? null : a / x), { color: PURPLE, width: 4 });
+  eqEl.innerHTML = `y = <span class="m-color">${fmtA(a)}</span>/x`;
+}
+aS = Graph.slider('playSliders', { label: 'a', min: -6, max: 6, step: 1, value: 1, color: '#ec4899', onInput: redraw });
+redraw();
+
+/* ---------- helpers ---------- */
+const R = a => `y = ${a < 0 ? '−' : ''}${Math.abs(a)}/x`;   // format y = a/x
+
+/* ---------- drill 1: match the curve to its equation ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Which curve is this? 👀',
+  intro: 'Two clues: which corners is the curve in (that’s the sign of a), and how far out does it sit (that’s the size of a)?',
+  rounds: 8,
+  generate() {
+    const a = Quiz.pick([1, 2, 3, 4, -1, -2, -3, -4]);
+    const wrongs = new Set();
+    for (const d of [-a, a + (a > 0 ? 1 : -1), a > 0 ? -1 : 1, a > 0 ? -2 : 2]) {
+      if (d !== 0 && d !== a) wrongs.add(d);
+      if (wrongs.size === 3) break;
+    }
+    return {
+      prompt(el) {
+        el.innerHTML = 'Which equation matches this curve?';
+        const gg = Graph.create(el, { xmin: -8, xmax: 8, ymin: -8, ymax: 8, width: 300, height: 300 });
+        gg.curve(x => (x === 0 ? null : a / x), { color: PURPLE, width: 3.5 });
+      },
+      choices: [{ html: `<span class="eq">${R(a)}</span>`, correct: true },
+        ...[...wrongs].map(w => ({ html: `<span class="eq">${R(w)}</span>` }))],
+      explain: `The curve sits in the ${a > 0 ? 'top-right &amp; bottom-left' : 'top-left &amp; bottom-right'} — ` +
+        `so a is ${a > 0 ? 'positive' : 'negative'}. Reading a point off it (like x = 1, y = ${a}) pins a = ${a}.`,
+    };
+  },
+});
+
+/* ---------- drill 2: use the rule (inverse proportion) ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Work the rule 🧮',
+  intro: 'Put the number in, get the number out. Divide — carefully with the minus signs!',
+  rounds: 8,
+  generate() {
+    const a = Quiz.pick([12, 24, 36, 20, 18, -12, -24, -18]);
+    // choose an x that divides a cleanly
+    const divisors = [];
+    for (let d = -Math.abs(a); d <= Math.abs(a); d++) if (d !== 0 && a % d === 0) divisors.push(d);
+    const x = Quiz.pick(divisors.filter(d => Math.abs(a / d) <= 12 && Math.abs(d) <= 12));
+    const y = a / x;
+    return {
+      prompt: `For <span class="eq">${R(a)}</span>, what is <strong>y</strong> when <span class="eq">x = ${x < 0 ? '−' + (-x) : x}</span>?`,
+      input: {
+        keypad: 'num',
+        placeholder: 'y = ?',
+        check: s => Number(String(s).replace(/[−–—]/g, '-').trim()) === y,
+        answer: `y = ${y < 0 ? '−' + (-y) : y}`,
+      },
+      explain: `y = ${a < 0 ? '(−' + (-a) + ')' : a} ÷ ${x < 0 ? '(−' + (-x) + ')' : x} = ${y < 0 ? '−' + (-y) : y}. ` +
+        `A negative divided by a negative is positive; mixed signs give a negative.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

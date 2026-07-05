@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 12 · Exponentials: y = bˣ</title>
+<link rel="stylesheet" href="../assets/course.css?v=4">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 3 of 3 · FINALE 🏁</p>
+    <h1>Exponentials: y&nbsp;=&nbsp;bˣ 🚀</h1>
+    <p>The curve behind viral videos, compound interest, and radioactive decay. It starts slow…
+    then goes <em>wild</em>.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>You’ll read <span class="eq">y = b<sup>x</sup></span> — where <em>x</em> is now the
+    <strong>power</strong>, not the base. You’ll see why it always passes through
+    <span class="eq">(0, 1)</span>, why it’s always positive, and the difference between
+    <strong>growth</strong> 📈 and <strong>decay</strong> 📉.</p>
+  </div>
+
+  <div class="card">
+    <h2>Meet y = 2ˣ</h2>
+    <p>This time <em>x</em> sits <em>up high</em> as the power: “raise 2 to the power <em>x</em>.”
+    Each step right <strong>doubles</strong> the last <em>y</em>:</p>
+    <table class="vals">
+      <tr><th>x</th><td>−2</td><td>−1</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+      <tr><th>y = 2<sup>x</sup></th><td>¼</td><td>½</td><td>1</td><td>2</td><td>4</td><td>8</td><td>16</td></tr>
+    </table>
+    <p>Three things to notice:</p>
+    <ul>
+      <li>It always crosses the y-axis at <strong>(0, 1)</strong> — because <em>any</em> number to the
+      power 0 is 1.</li>
+      <li>It’s <strong>always positive</strong>. Going left, <em>y</em> gets tinier and tinier but never
+      reaches 0 — the x-axis is an <strong>asymptote</strong> (just like last lesson’s curve).</li>
+      <li>Going right, it doesn’t just rise — it <strong>accelerates</strong>. That’s
+      <strong>exponential growth</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Growth 📈 vs Decay 📉</h2>
+    <p>The base <strong class="m-color">b</strong> decides everything:</p>
+    <ul>
+      <li><strong class="m-color">b</strong> bigger than 1 (2, 3, 10…) → each step <em>multiplies up</em>
+      → the curve <strong>grows</strong>. Doubling money, spreading rumours, populations.</li>
+      <li><strong class="m-color">b</strong> between 0 and 1 (½, 0.9…) → each step <em>shrinks</em> →
+      the curve <strong>decays</strong>. Radioactive material, a cooling drink, medicine leaving the blood.</li>
+    </ul>
+    <p>Growth curves sweep <em>up</em> to the right; decay curves slide <em>down</em> to the right.
+    Both still pass through <span class="eq">(0, 1)</span>.</p>
+  </div>
+
+  <div class="card">
+    <h2>🕹️ The exponential machine</h2>
+    <p>Drag <strong class="m-color">b</strong>. Above 1 it rockets up; below 1 it melts away.</p>
+    <div id="playSliders"></div>
+    <p class="eq-big" id="playEq"></p>
+    <div id="playGraph"></div>
+    <div class="tip"><strong>Missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Find the value of <strong class="m-color">b</strong> that makes the curve <strong>flat</strong>.
+        (What’s <span class="eq">1<sup>x</sup></span> always equal to?)</li>
+        <li>Make the <strong>fastest-growing</strong> curve you can.</li>
+        <li>Turn it into <strong>decay</strong>. What did <strong class="m-color">b</strong> have to be?</li>
+        <li>Whatever you pick, the curve always goes through one special point. Which one? 🎯</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> <strong class="m-color">b</strong> &gt; 1 grows,
+    0 &lt; <strong class="m-color">b</strong> &lt; 1 decays, and every exponential passes through
+    <span class="eq">(0, 1)</span>.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills — then you’ve finished the whole course. Chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>🏆 You did it, Amelia!</h2>
+    <p>Lines, gradients, intercepts, curves, hyperbolas, parabolas, exponentials — that’s the entire
+    Year 10 graphs toolkit. Come back and replay any drill tomorrow and next week; that spacing is
+    what turns “I get it” into “I own it.” 💜</p>
+  </div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p><a href="https://corbettmaths.com/2019/09/02/exponential-graphs/" target="_blank">Corbettmaths —
+    exponential graphs</a> for a video, and <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>
+    to play: type <code>y = b^x</code>, add a slider for <code>b</code>, and watch growth become decay as
+    <code>b</code> drops below 1.</p>
+    <p>💬 <strong>Curious?</strong> Ask Claude — “how does compound interest use this?” is a great real-world one.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0011-parabolas.html">← Lesson 11: Parabolas</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js?v=4"></script>
+<script src="../assets/quiz.js?v=4"></script>
+<script>
+const PURPLE = '#7c3aed', TEAL = '#0d9488';
+
+/* ---------- playground ---------- */
+const g = Graph.create('playGraph', { xmin: -4, xmax: 4, ymin: -2, ymax: 12, width: 420, height: 420, labelEvery: 2 });
+const eqEl = document.getElementById('playEq');
+let bS;
+function redraw() {
+  g.clear();
+  const b = bS.value;
+  g.curve(x => Math.pow(b, x), { color: PURPLE, width: 4 });
+  g.point(0, 1, { color: TEAL, label: '(0, 1)' });
+  const bt = Quiz.fmtNum(b);
+  eqEl.innerHTML = `y = <span class="m-color">${bt}</span><sup>x</sup>` +
+    (b > 1 ? ' &nbsp;📈 growth' : b < 1 ? ' &nbsp;📉 decay' : ' &nbsp;➡️ flat');
+}
+bS = Graph.slider('playSliders', { label: 'b (base)', min: 0.5, max: 4, step: 0.5, value: 2,
+  color: '#ec4899', fmt: v => Quiz.fmtNum(v), onInput: redraw });
+redraw();
+
+/* ---------- drill 1: evaluate ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Powers of the base 🔢',
+  intro: 'Work out the value. Remember: the little number up top is how many times you multiply the base by itself.',
+  rounds: 8,
+  generate() {
+    const b = Quiz.pick([2, 3, 5, 10]);
+    const maxX = b === 2 ? 7 : b === 3 ? 4 : b === 5 ? 3 : 2;
+    const x = Quiz.ri(0, maxX);
+    const y = Math.pow(b, x);
+    return {
+      prompt: `What is <span class="eq">${b}<sup>${x}</sup></span>?${x === 0 ? ' <em>(careful — this one’s a trap!)</em>' : ''}`,
+      input: {
+        keypad: 'num',
+        placeholder: '?',
+        check: s => Number(String(s).replace(/[−–—]/g, '-').trim()) === y,
+        answer: String(y),
+      },
+      explain: x === 0
+        ? `Any number to the power 0 is <strong>1</strong> — that’s why every exponential crosses the y-axis at (0, 1).`
+        : `${b}<sup>${x}</sup> means ${Array(x).fill(b).join(' × ')} = <strong>${y}</strong>.`,
+    };
+  },
+});
+
+/* ---------- drill 2: growth or decay? ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Growth or decay? 📈📉',
+  intro: 'Equation or real-life story — decide whether it grows or shrinks over time.',
+  rounds: 8,
+  generate() {
+    const items = [
+      { q: '<span class="eq">y = 2<sup>x</sup></span>', a: 'growth', why: 'base 2 is bigger than 1, so it multiplies up' },
+      { q: '<span class="eq">y = 3<sup>x</sup></span>', a: 'growth', why: 'base 3 is bigger than 1' },
+      { q: '<span class="eq">y = 10<sup>x</sup></span>', a: 'growth', why: 'base 10 is bigger than 1' },
+      { q: '<span class="eq">y = (½)<sup>x</sup></span>', a: 'decay', why: 'base ½ is between 0 and 1, so it shrinks each step' },
+      { q: '<span class="eq">y = 0.8<sup>x</sup></span>', a: 'decay', why: 'base 0.8 is less than 1' },
+      { q: 'A population that <strong>doubles</strong> every year', a: 'growth', why: 'doubling means multiplying by 2 (b &gt; 1)' },
+      { q: '$100 in a bank, growing a little every year 💰', a: 'growth', why: 'interest multiplies the money up' },
+      { q: 'A rumour reaching <strong>twice</strong> as many people each day', a: 'growth', why: 'doubling each step is growth' },
+      { q: 'A radioactive sample that <strong>halves</strong> every hour ☢️', a: 'decay', why: 'halving means multiplying by ½ (b &lt; 1)' },
+      { q: 'A hot cup of tea cooling toward room temperature ☕', a: 'decay', why: 'the extra heat shrinks away each minute' },
+      { q: 'Medicine in the blood dropping by half every few hours 💊', a: 'decay', why: 'halving repeatedly is decay' },
+    ];
+    const it = Quiz.pick(items);
+    return {
+      prompt: `Growth or decay?<div class="eq-big" style="font-size:1.15rem">${it.q}</div>`,
+      choices: [
+        { html: '📈 Growth', correct: it.a === 'growth' },
+        { html: '📉 Decay', correct: it.a === 'decay' },
+      ],
+      explain: `It’s <strong>${it.a}</strong> — ${it.why}.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

@@ -136,6 +136,40 @@ const Graph = (() => {
         return el;
       },
 
+      // Plot y = f(x) as a smooth curve. Samples across the x-range and lifts
+      // the pen at discontinuities — a non-finite value (e.g. 1/0) or a huge
+      // vertical jump (an asymptote) — so curves like y = a/x draw as two
+      // separate branches. Anything off the plot is trimmed by the clip.
+      //   st: { color, width, dash, samples, label, labelAt, labelAnchor }
+      curve(fn, st = {}) {
+        const n = st.samples || 240;
+        const step = (o.xmax - o.xmin) / n;
+        let d = '', penDown = false, prevY = null;
+        for (let k = 0; k <= n; k++) {
+          const x = o.xmin + k * step;
+          const y = fn(x);
+          if (y == null || !isFinite(y)) { penDown = false; prevY = null; continue; }
+          // Lift the pen only at a genuine asymptote — where the curve flings
+          // to opposite infinities between samples (e.g. y = 1/x across x = 0).
+          // A merely steep curve exiting one edge (a parabola arm, an exponential)
+          // stays connected and is trimmed by the clip.
+          if (penDown && prevY != null &&
+              ((prevY > o.ymax && y < o.ymin) || (prevY < o.ymin && y > o.ymax))) penDown = false;
+          d += (penDown ? ' L ' : ' M ') + X(x).toFixed(1) + ' ' + Y(y).toFixed(1);
+          penDown = true; prevY = y;
+        }
+        const el = styled('path', { d: d.trim() }, st);
+        if (st.label) {
+          const lx = st.labelAt != null ? st.labelAt : o.xmax - 2;
+          let ly = fn(lx);
+          if (ly != null && isFinite(ly)) {
+            ly = Math.min(Math.max(ly, o.ymin + 1), o.ymax - 1);
+            g.text(lx, ly + 0.8, st.label, { color: st.color, anchor: st.labelAnchor || 'middle' });
+          }
+        }
+        return el;
+      },
+
       hline(y, st = {}) { return g.line(0, y, st); },
 
       vline(x, st = {}) {

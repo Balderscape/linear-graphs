@@ -21,6 +21,7 @@ const g = Graph.create('someDivId', {
 
 g.line(m, c, {color, width, dash, label});     // draws y = mx + c, auto-clipped
 g.hline(y, {…});  g.vline(x, {…});             // horizontal / vertical lines
+g.curve(fn, {color, width, dash, label, labelAt, samples});  // plots y = fn(x)
 g.segment(x1, y1, x2, y2, {…});
 g.point(x, y, {color, size, label});
 g.text(x, y, 'hi', {color, size, anchor});     // white-outlined, always readable
@@ -28,6 +29,12 @@ g.riseRun(x0, dx, m, c, {color});              // dashed "across dx / up rise" t
 g.clear();                                     // removes drawn shapes, keeps grid+axes
 g.onClick((x, y) => {…}, snap);                // snapped click coords (default snap 1)
 ```
+
+`curve(fn, …)` samples `fn` across the x-range and lifts the pen at asymptotes
+(non-finite values, or a fling to opposite infinities) so `y = a/x` draws as two
+branches; parabolas and exponentials stay one connected curve, trimmed by the clip.
+Return `null`/`NaN` from `fn` at undefined points (e.g. `x => x===0 ? null : 1/x`).
+`labelAt` sets the x where the label sits (default near the right edge).
 
 Style opts: `color` (CSS colour), `width` (stroke px), `dash: true`, `label: 'y = 2x'`.
 Palette to reuse: purple `#7c3aed`, pink `#ec4899` (use for **m**/gradient), teal `#0d9488`
@@ -79,8 +86,18 @@ automatically from the `placeholder`, so you don't configure anything:
 
 `check` still receives the **full** string (the `y = ` prefix is prepended for
 you), so existing `Quiz.checkLine(s, {m, c})` checks are unchanged. Override the
-auto choice per-question with `input.keypad: 'line' | 'linevar' | 'coord'` and/or
-`input.prefix: 'y = '` (a locked, un-typed string).
+auto choice per-question with `input.keypad` and/or `input.prefix: 'y = '` (a
+locked, un-typed string). Keypad modes:
+
+| `input.keypad` | keys | prefix | pair with |
+|---|---|---|---|
+| `line` | digits, `x - + / .` | `y = ` | `checkLine(s, {m, c})` |
+| `linevar` | adds `y` `x` `=` | none | `checkLine(s, {type:'vline', x})` |
+| `coord` | `( , )` digits `−` (+`never`) | none | a coordinate parser |
+| `quad` | digits, `x²` `− +` | `y = ` | `checkQuad(s, {a, k})` — parabola `ax²+k` |
+| `recip` | digits, `x / −` | `y = ` | `checkRecip(s, {a})` — inverse `a/x` |
+| `exp` | `x ^ ( )` digits `/ − .` | `y = ` | `checkExp(s, {b})` — exponential `b^x` |
+| `num` | digits, `− / .` | none | a plain-number check, e.g. `s => Number(s)===42` |
 
 `prompt` may be an html string **or** a function receiving the prompt element
 (use the function form to embed a Graph in the question).
@@ -90,6 +107,9 @@ Helpers:
 ```js
 Quiz.parseLine('y = -x/2 + 3')   // → {type:'line', m:-0.5, c:3};  'x = 4' → {type:'vline', x:4}; bad → null
 Quiz.checkLine(str, {m, c})      // typed-answer checker (also {type:'vline', x: k})
+Quiz.checkQuad(str, {a, k})      // parabola  y = a x² + k   (accepts x², x^2, xx)
+Quiz.checkRecip(str, {a})        // inverse   y = a / x
+Quiz.checkExp(str, {b})          // exponential  y = b^x     (accepts 2^x, (1/2)^x, 0.5^x)
 Quiz.fmtLine(m, c)               // → 'y = 2x − 3', handles m of 0 / 1 / −1, fractions
 Quiz.fmtNum(-0.5)                // → '-1/2'
 Quiz.ri(a, b)                    // random int in [a, b]
