@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 11 · Meet the Parabola</title>
+<link rel="stylesheet" href="../assets/course.css?v=4">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 2 of 6</p>
+    <h1>Meet the Parabola 🥣</h1>
+    <p>The shape of a thrown ball, a fountain, a satellite dish. We’ll build it the honest way —
+    from a <strong>table of values</strong>, one point at a time.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>You’ll meet <span class="eq">y = x²</span>: make a table, plot the points, and join them into a
+    smooth <strong>U</strong>. By the end you’ll know its shape, its mirror <strong>symmetry</strong>,
+    and its lowest point — the <strong>vertex</strong>.</p>
+  </div>
+
+  <div class="card">
+    <h2>The rule: square your x</h2>
+    <p>Just like a line, a parabola is a rule connecting x and y. This time the rule is
+    “<strong>square the x</strong>.” To draw <em>any</em> graph you can’t see yet, you do the same
+    reliable thing you did with lines: <strong>build a table of values</strong>. Pick some x’s, work out
+    each y:</p>
+    <table class="vals">
+      <tr><th>x</th><td>−3</td><td>−2</td><td>−1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+      <tr><th>y = x²</th><td>9</td><td>4</td><td>1</td><td>0</td><td>1</td><td>4</td><td>9</td></tr>
+    </table>
+    <p>The trick everyone trips on: squaring a <strong>negative</strong> gives a <strong>positive</strong>.
+    <span class="eq">(−3)² = (−3) × (−3) = 9</span>, not −9. So the y-row is never negative.</p>
+  </div>
+
+  <div class="card">
+    <h2>From table to curve</h2>
+    <p>Now plot each pair as a point, then join them with a <strong>smooth curve</strong> — <em>not</em>
+    straight lines between the dots (that’s the #1 mistake). Here are the table points, joined up:</p>
+    <div id="playGraph"></div>
+    <p>Three things to notice on the picture:</p>
+    <ul>
+      <li>It’s a symmetrical <strong>U</strong> called a <strong>parabola</strong>. The
+      <strong>mirror line</strong> is the y-axis — <span class="eq">x = −3</span> and
+      <span class="eq">x = 3</span> both land at 9.</li>
+      <li>The bottom of the U — the point <span class="eq">(0, 0)</span> here — is the
+      <strong>vertex</strong> (the turning point).</li>
+      <li>The arms shoot <strong>upward forever</strong>, getting steeper and steeper.</li>
+    </ul>
+    <div class="win">💚 <strong>Easy win:</strong> to draw a parabola, make a table (remember negatives
+    square to positives!), plot the points, and join them in a smooth U.</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills — both are exactly the table skill you’ll use to plot. Chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>See it built live on <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a> — type
+    <code>y = x^2</code>. Or watch <a href="https://corbettmaths.com/2019/09/02/quadratic-graphs/"
+    target="_blank">Corbettmaths — quadratic graphs</a>.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude — “why does the curve get steeper?” is a great one.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0010-inverse-relationships.html">← Lesson 10: Inverse</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0012-parabola-stretch.html">Lesson 12: Stretch &amp; Flip →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js?v=4"></script>
+<script src="../assets/quiz.js?v=4"></script>
+<script>
+const PURPLE = '#7c3aed', TEAL = '#0d9488';
+const num = s => Number(String(s).replace(/[−–—]/g, '-').trim());
+const M = n => (n < 0 ? '−' + (-n) : String(n));
+
+/* ---------- table-to-curve picture ---------- */
+const g = Graph.create('playGraph', { xmin: -4, xmax: 4, ymin: -2, ymax: 14, width: 420, height: 420, labelEvery: 2 });
+g.curve(x => x * x, { color: PURPLE, width: 4 });
+for (const x of [-3, -2, -1, 0, 1, 2, 3]) g.point(x, x * x, { color: TEAL, size: 5 });
+g.text(0, -1.2, 'vertex (0, 0)', { color: TEAL, anchor: 'middle', size: 12 });
+
+/* ---------- drill 1: square it ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Square it 🔲',
+  intro: 'Work out y = x². The traps are the negatives — a negative squared is positive!',
+  rounds: 8,
+  generate() {
+    const x = Quiz.pick([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7]);
+    const y = x * x;
+    return {
+      prompt: `In <span class="eq">y = x²</span>, what is <strong>y</strong> when ` +
+        `<span class="eq">x = ${M(x)}</span>?${x < 0 ? ' <em>(careful with the minus!)</em>' : ''}`,
+      input: { keypad: 'num', placeholder: '?', check: s => num(s) === y, answer: String(y) },
+      explain: x < 0
+        ? `(${M(x)})² means (${M(x)}) × (${M(x)}) = <strong>${y}</strong>. Negative × negative = positive, so a square is never negative.`
+        : `${x}² = ${x} × ${x} = <strong>${y}</strong>.`,
+    };
+  },
+});
+
+/* ---------- drill 2: complete the table for y = x² ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Complete the table 🧮',
+  intro: 'Fill the missing box — the same move you make to plot a parabola.',
+  rounds: 8,
+  generate() {
+    const xs = [-3, -2, -1, 0, 1, 2, 3];
+    const ys = xs.map(x => x * x);
+    const hide = Quiz.ri(0, xs.length - 1);
+    const y = ys[hide];
+    const row = cells => cells.map(c => `<td>${c}</td>`).join('');
+    return {
+      prompt: `Complete the table for <span class="eq">y = x²</span>:` +
+        `<table class="vals" style="margin:10px 0">` +
+        `<tr><th>x</th>${row(xs.map(M))}</tr>` +
+        `<tr><th>y</th>${row(ys.map((v, i) => i === hide ? '<strong style="color:#ec4899">?</strong>' : v))}</tr>` +
+        `</table>What number goes in the <strong style="color:#ec4899">?</strong> box (x = ${M(xs[hide])})?`,
+      input: { keypad: 'num', placeholder: '?', check: s => num(s) === y, answer: String(y) },
+      explain: `(${M(xs[hide])})² = <strong>${y}</strong> → the point (${M(xs[hide])}, ${y}) on the curve.`,
+    };
+  },
+});
+</script>
+</body>
+</html>

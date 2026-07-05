@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 15 · Grand Finale Exam 🏆</title>
+<link rel="stylesheet" href="../assets/course.css?v=4">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 6 of 6 · GRAND FINALE 🏁</p>
+    <h1>Grand Finale Exam 🏆</h1>
+    <p>Everything. Lines <em>and</em> curves, mixed in random order, no hints about which skill each
+    question needs. The whole course in one gauntlet.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 The final test</h2>
+    <p>Sixteen questions drawn from <strong>all fifteen lessons</strong> — gradients and intercepts,
+    weird lines and intersections, inverse curves, parabolas, and exponentials. Real mastery is being
+    ready for <em>any</em> question without being told which tool to grab. Fresh questions every replay.
+    💪</p>
+  </div>
+
+  <div id="gauntlet"></div>
+
+  <div class="tip">🏅 <strong>Beat your best:</strong> note today’s score, then come back
+  <strong>tomorrow</strong> and <strong>next week</strong> and beat it. Spacing it out is what moves it
+  all into long-term memory.</div>
+
+  <div class="card" style="text-align:center;border:3px solid #f59e0b;background:linear-gradient(135deg,#fef3c7 0%,#fdf2f8 55%,#ede9fe 100%)">
+    <h2>🏆 Champion’s certificate</h2>
+    <div style="font-size:2rem;font-weight:800;letter-spacing:.06em;color:#7c3aed;margin:10px 0 2px">GRAPH&nbsp;LEGEND</div>
+    <div style="font-size:1.25rem;margin:2px 0 10px">🌟 lines · curves · everything 🌟</div>
+    <p style="font-size:1.05rem;max-width:34em;margin:0 auto"><strong>Amelia</strong> has conquered the
+    entire Year 10 graphs toolkit — straight lines, hyperbolas, parabolas and exponentials.</p>
+    <p style="margin-top:12px">Any topic still feel shaky? Replay its lesson from the
+    <a href="../index.html">course map</a>.</p>
+    <p><strong>Then go show this certificate to Dad. 😎</strong></p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0014-exponentials.html">← Lesson 14: Exponentials</a>
+    <a href="../index.html">🏠 Course map — you finished it all!</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js?v=4"></script>
+<script src="../assets/quiz.js?v=4"></script>
+<script>
+/* ---------- shared helpers ---------- */
+const M = n => Quiz.fmtNum(n).replace(/-/g, '−');
+const num = s => Number(String(s).replace(/[−–—]/g, '-').trim());
+function aTxt(a) { return a === 1 ? '' : a === -1 ? '−' : Quiz.fmtNum(a).replace('-', '−'); }
+function quadPlain(a, k) {
+  let s = `y = ${aTxt(a)}x²`;
+  if (k > 0) s += ` + ${k}`; else if (k < 0) s += ` − ${-k}`;
+  return s;
+}
+const R = a => `y = ${a < 0 ? '−' : ''}${Math.abs(a)}/x`;
+function parseCoord(s) {
+  const t = String(s).replace(/[()\s]/g, '').replace(/[−–—]/g, '-');
+  const p = t.split(',');
+  if (p.length !== 2 || p[0] === '' || p[1] === '') return null;
+  const x = Number(p[0]), y = Number(p[1]);
+  if (Number.isNaN(x) || Number.isNaN(y)) return null;
+  return { x, y };
+}
+function crashPair() {
+  while (true) {
+    const x0 = Quiz.ri(-4, 4), y0 = Quiz.ri(-4, 4);
+    const m1 = Quiz.rnz(-3, 3);
+    let m2 = Quiz.rnz(-3, 3);
+    while (m2 === m1) m2 = Quiz.rnz(-3, 3);
+    const c1 = y0 - m1 * x0, c2 = y0 - m2 * x0;
+    if (Math.abs(c1) > 8 || Math.abs(c2) > 8) continue;
+    return { x0, y0, m1, c1, m2, c2 };
+  }
+}
+
+/* ---------- question generators (one per skill) ---------- */
+
+// 1 · spot m or c
+function gSpot() {
+  const m = Quiz.rnz(-6, 6), c = Quiz.rnz(-9, 9);
+  const askM = Math.random() < 0.5, right = askM ? m : c;
+  const wrongs = new Set();
+  for (const w of [askM ? c : m, -right, right + 1, right - 1]) {
+    if (w !== right) wrongs.add(w);
+    if (wrongs.size === 3) break;
+  }
+  return {
+    prompt: `What is the <strong>${askM ? 'gradient' : 'y-intercept'}</strong> of <span class="eq">${Quiz.fmtLine(m, c)}</span>?`,
+    choices: [{ html: M(right), correct: true }, ...[...wrongs].map(w => ({ html: M(w) }))],
+    explain: askM ? `The gradient is what multiplies x — here ${M(m)}.` : `The y-intercept is the lone number — here ${M(c)}.`,
+  };
+}
+
+// 2 · drawn line → equation
+function gGraphLine() {
+  const m = Quiz.rnz(-3, 3), c = Quiz.ri(-5, 5);
+  return {
+    prompt(el) {
+      el.innerHTML = 'Type the equation of this line.';
+      const gg = Graph.create(el, { width: 280, height: 280 });
+      gg.line(m, c, { color: '#7c3aed', width: 4 });
+      gg.point(0, c, { color: '#0d9488' });
+    },
+    input: { placeholder: 'y = …', check: s => Quiz.checkLine(s, { m, c }), answer: Quiz.fmtLine(m, c) },
+    explain: `Crosses the y-axis at ${M(c)} (that’s c) and slopes ${m > 0 ? 'up' : 'down'} by ${M(m)} per step (that’s m).`,
+  };
+}
+
+// 3 · weird line  x = k  /  y = k
+function gWeird() {
+  const vert = Math.random() < 0.5, k = Quiz.ri(-6, 6);
+  return {
+    prompt(el) {
+      el.innerHTML = 'What’s the equation of this line?';
+      const gg = Graph.create(el, { width: 280, height: 280 });
+      vert ? gg.vline(k, { color: '#ec4899', width: 4 }) : gg.hline(k, { color: '#0d9488', width: 4 });
+    },
+    input: {
+      placeholder: 'y = …  or  x = …',
+      check: s => Quiz.checkLine(s, vert ? { type: 'vline', x: k } : { m: 0, c: k }),
+      answer: vert ? `x = ${M(k)}` : `y = ${M(k)}`,
+    },
+    explain: vert ? `Every point has x = ${M(k)} → x = ${M(k)}.` : `Flat at height ${M(k)} → y = ${M(k)}.`,
+  };
+}
+
+// 4 · intersection of two lines
+function gIntersect() {
+  const p = crashPair();
+  return {
+    prompt: `Where do these lines cross? Type it like (2, 3).` +
+      `<div class="eq-big">${Quiz.fmtLine(p.m1, p.c1)} &nbsp;and&nbsp; ${Quiz.fmtLine(p.m2, p.c2)}</div>`,
+    input: {
+      placeholder: '(x, y)',
+      check: s => { const q = parseCoord(s); return !!q && Quiz.approx(q.x, p.x0) && Quiz.approx(q.y, p.y0); },
+      answer: `(${M(p.x0)}, ${M(p.y0)})`,
+    },
+    explain: `Set the right-hand sides equal and solve: x = ${M(p.x0)}, then y = ${M(p.y0)}.`,
+  };
+}
+
+// 5 · rearrange, then read the gradient
+function gRearrange() {
+  const m = Quiz.rnz(-4, 4), c = Quiz.rnz(-6, 6), f = Quiz.pick([2, 3]);
+  const eq = `${f}y = ${M(f * m)}x ${f * c < 0 ? '− ' + M(-f * c) : '+ ' + M(f * c)}`;
+  const wrongs = new Set();
+  for (const w of [f * m, -m, m + 1, c]) {
+    if (w !== m) wrongs.add(w);
+    if (wrongs.size === 3) break;
+  }
+  return {
+    prompt: `Rearranged into y = mx + c, what is the <strong>gradient</strong> of <span class="eq">${eq}</span>?`,
+    choices: [{ html: M(m), correct: true }, ...[...wrongs].map(w => ({ html: M(w) }))],
+    explain: `Divide everything by ${f}: y = ${M(m)}x ${c < 0 ? '− ' + M(-c) : '+ ' + M(c)}. Gradient = ${M(m)}.`,
+  };
+}
+
+// 6 · inverse curve → equation
+function gInverse() {
+  const a = Quiz.pick([1, 2, 3, -1, -2, -3]);
+  const wrongs = new Set();
+  for (const d of [-a, a + (a > 0 ? 1 : -1), a > 0 ? -1 : 1]) {
+    if (d !== 0 && d !== a) wrongs.add(d);
+    if (wrongs.size === 3) break;
+  }
+  return {
+    prompt(el) {
+      el.innerHTML = 'Which equation matches this curve?';
+      const gg = Graph.create(el, { xmin: -8, xmax: 8, ymin: -8, ymax: 8, width: 280, height: 280 });
+      gg.curve(x => (x === 0 ? null : a / x), { color: '#7c3aed', width: 3.5 });
+    },
+    choices: [{ html: `<span class="eq">${R(a)}</span>`, correct: true },
+      ...[...wrongs].map(d => ({ html: `<span class="eq">${R(d)}</span>` }))],
+    explain: `Two branches in the ${a > 0 ? 'top-right & bottom-left' : 'top-left & bottom-right'} → a is ` +
+      `${a > 0 ? 'positive' : 'negative'}; the point (1, ${a}) pins a = ${a}.`,
+  };
+}
+
+// 7 · inverse: read the rule
+function gInverseEval() {
+  const t = Quiz.pick([{ a: 12, x: [2, 3, 4, 6] }, { a: 24, x: [3, 4, 6, 8] }, { a: 18, x: [2, 3, 6, 9] }]);
+  const x = Quiz.pick(t.x), y = t.a / x;
+  return {
+    prompt: `For <span class="eq">${R(t.a)}</span>, what is <strong>y</strong> when x = ${x}?`,
+    input: { keypad: 'num', placeholder: '?', check: s => num(s) === y, answer: String(y) },
+    explain: `${t.a} ÷ ${x} = ${y}.`,
+  };
+}
+
+// 8 · parabola → equation
+function gParabola() {
+  const a = Quiz.pick([1, 2, -1, -2]), k = Quiz.ri(-4, 4);
+  const right = quadPlain(a, k);
+  const distract = new Set();
+  for (const [da, dk] of [[a, -k], [-a, k], [a, k + 2], [-a, -k]]) {
+    const s = quadPlain(da, dk);
+    if (s !== right) distract.add(s);
+    if (distract.size === 3) break;
+  }
+  return {
+    prompt(el) {
+      el.innerHTML = 'Which equation matches this parabola?';
+      const gg = Graph.create(el, { xmin: -5, xmax: 5, ymin: -10, ymax: 10, width: 280, height: 280 });
+      gg.curve(x => a * x * x + k, { color: '#7c3aed', width: 3.5 });
+      gg.point(0, k, { color: '#0d9488' });
+    },
+    choices: [{ html: `<span class="eq">${right}</span>`, correct: true },
+      ...[...distract].map(d => ({ html: `<span class="eq">${d}</span>` }))],
+    explain: `${a > 0 ? 'Smile (a positive)' : 'Frown (a negative)'}, vertex at (0, ${k}) → k = ${k}, a = ${M(a)}.`,
+  };
+}
+
+// 9 · exponential: evaluate
+function gExpEval() {
+  const b = Quiz.pick([2, 3, 5, 10]);
+  const maxX = b === 2 ? 6 : b === 3 ? 4 : b === 5 ? 3 : 2;
+  const x = Quiz.ri(0, maxX), y = Math.pow(b, x);
+  return {
+    prompt: `What is <span class="eq">${b}<sup>${x}</sup></span>?`,
+    input: { keypad: 'num', placeholder: '?', check: s => num(s) === y, answer: String(y) },
+    explain: x === 0 ? `Anything to the power 0 is 1.` : `${Array(x).fill(b).join(' × ')} = ${y}.`,
+  };
+}
+
+// 10 · exponential: growth or decay
+function gGrowthDecay() {
+  const items = [
+    { q: '<span class="eq">y = 2<sup>x</sup></span>', a: 'growth' },
+    { q: '<span class="eq">y = (½)<sup>x</sup></span>', a: 'decay' },
+    { q: '<span class="eq">y = 5<sup>x</sup></span>', a: 'growth' },
+    { q: 'A population doubling every year', a: 'growth' },
+    { q: 'A sample halving every hour ☢️', a: 'decay' },
+    { q: 'A cup of tea cooling to room temperature ☕', a: 'decay' },
+  ];
+  const it = Quiz.pick(items);
+  return {
+    prompt: `Growth or decay?<div class="eq-big" style="font-size:1.05rem">${it.q}</div>`,
+    choices: [{ html: '📈 Growth', correct: it.a === 'growth' }, { html: '📉 Decay', correct: it.a === 'decay' }],
+    explain: `It’s ${it.a}.`,
+  };
+}
+
+/* ---------- THE GRAND FINALE ---------- */
+const GENS = [gSpot, gGraphLine, gWeird, gIntersect, gRearrange,
+  gInverse, gInverseEval, gParabola, gExpEval, gGrowthDecay];
+
+Quiz.create('gauntlet', {
+  title: 'THE GRAND FINALE 👑',
+  intro: '16 questions from every corner of the course — lines and curves, in random order. ' +
+    'Fresh every replay. This is the whole thing. Show it what you’ve got. 💪',
+  rounds: 16,
+  generate: () => Quiz.pick(GENS)(),
+});
+</script>
+</body>
+</html>

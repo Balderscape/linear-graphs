@@ -10,7 +10,7 @@
 <div class="wrap">
 
   <div class="hero">
-    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 1 of 3</p>
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 1 of 6</p>
     <h1>Inverse Relationships: y&nbsp;=&nbsp;a/x 🔀</h1>
     <p>Straight lines are done. Now the curves — starting with the <em>trade-off</em> curve,
     where the bigger one thing gets, the smaller the other has to be.</p>
@@ -93,7 +93,7 @@
   <div class="lesson-nav">
     <a href="0009-boss-level.html">← Lesson 9: Boss Level</a>
     <a href="../index.html">🏠 Course map</a>
-    <a href="0011-parabolas.html">Lesson 11: Parabolas →</a>
+    <a href="0011-meet-the-parabola.html">Lesson 11: Meet the Parabola →</a>
   </div>
   <p class="footer-links">Quick reference:
     <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
@@ -149,28 +149,38 @@ Quiz.create('drill1', {
   },
 });
 
-/* ---------- drill 2: use the rule (inverse proportion) ---------- */
+/* ---------- drill 2: complete the table of values ---------- */
+const TABLES = [
+  { a: 12, xs: [1, 2, 3, 4] },
+  { a: 24, xs: [2, 3, 4, 6] },
+  { a: 36, xs: [3, 4, 6, 9] },
+  { a: 20, xs: [2, 4, 5, 10] },
+  { a: 18, xs: [2, 3, 6, 9] },
+];
 Quiz.create('drill2', {
-  title: 'Drill 2 · Work the rule 🧮',
-  intro: 'Put the number in, get the number out. Divide — carefully with the minus signs!',
+  title: 'Drill 2 · Complete the table 🧮',
+  intro: 'This is exactly how you’d plot the curve: make a table, work out each y, then plot the points. Fill the missing box.',
   rounds: 8,
   generate() {
-    const a = Quiz.pick([12, 24, 36, 20, 18, -12, -24, -18]);
-    // choose an x that divides a cleanly
-    const divisors = [];
-    for (let d = -Math.abs(a); d <= Math.abs(a); d++) if (d !== 0 && a % d === 0) divisors.push(d);
-    const x = Quiz.pick(divisors.filter(d => Math.abs(a / d) <= 12 && Math.abs(d) <= 12));
-    const y = a / x;
+    const t = Quiz.pick(TABLES);
+    const ys = t.xs.map(x => t.a / x);
+    const hide = Quiz.ri(0, t.xs.length - 1);
+    const y = ys[hide];
+    const row = (cells) => cells.map(c => `<td>${c}</td>`).join('');
     return {
-      prompt: `For <span class="eq">${R(a)}</span>, what is <strong>y</strong> when <span class="eq">x = ${x < 0 ? '−' + (-x) : x}</span>?`,
+      prompt: `Complete the table for <span class="eq">${R(t.a)}</span>:` +
+        `<table class="vals" style="margin:10px 0">` +
+        `<tr><th>x</th>${row(t.xs)}</tr>` +
+        `<tr><th>y</th>${row(ys.map((v, i) => i === hide ? '<strong style="color:#ec4899">?</strong>' : v))}</tr>` +
+        `</table>What number goes in the <strong style="color:#ec4899">?</strong> box (x = ${t.xs[hide]})?`,
       input: {
         keypad: 'num',
-        placeholder: 'y = ?',
+        placeholder: '?',
         check: s => Number(String(s).replace(/[−–—]/g, '-').trim()) === y,
-        answer: `y = ${y < 0 ? '−' + (-y) : y}`,
+        answer: String(y),
       },
-      explain: `y = ${a < 0 ? '(−' + (-a) + ')' : a} ÷ ${x < 0 ? '(−' + (-x) + ')' : x} = ${y < 0 ? '−' + (-y) : y}. ` +
-        `A negative divided by a negative is positive; mixed signs give a negative.`,
+      explain: `y = ${t.a} ÷ ${t.xs[hide]} = <strong>${y}</strong>. That’s the point ` +
+        `(${t.xs[hide]}, ${y}) — one dot on the curve.`,
     };
   },
 });

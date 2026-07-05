@@ -10,7 +10,7 @@
 <div class="wrap">
 
   <div class="hero">
-    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 3 of 3 · FINALE 🏁</p>
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 5 of 6</p>
     <h1>Exponentials: y&nbsp;=&nbsp;bˣ 🚀</h1>
     <p>The curve behind viral videos, compound interest, and radioactive decay. It starts slow…
     then goes <em>wild</em>.</p>
@@ -78,17 +78,17 @@
 
   <div class="card">
     <h2>Lock it in 🔒</h2>
-    <p>Two drills — then you’ve finished the whole course. Chase the 🌟🌟🌟.</p>
+    <p>Two drills. Fresh questions every replay — chase the 🌟🌟🌟.</p>
   </div>
 
   <div id="drill1"></div>
   <div id="drill2"></div>
 
-  <div class="card">
-    <h2>🏆 You did it, Amelia!</h2>
-    <p>Lines, gradients, intercepts, curves, hyperbolas, parabolas, exponentials — that’s the entire
-    Year 10 graphs toolkit. Come back and replay any drill tomorrow and next week; that spacing is
-    what turns “I get it” into “I own it.” 💜</p>
+  <div class="card" style="text-align:center;border:3px solid #f59e0b;background:linear-gradient(135deg,#fef3c7 0%,#fdf2f8 55%,#ede9fe 100%)">
+    <h2>🏁 One challenge left</h2>
+    <p>That’s every graph in the course — lines, hyperbolas, parabolas, exponentials. Time to prove it
+    all in one go.</p>
+    <p style="margin-top:12px"><a class="btn" href="0015-final-exam.html">Take the Grand Finale Exam →</a></p>
   </div>
 
   <div class="card">
@@ -101,9 +101,9 @@
   </div>
 
   <div class="lesson-nav">
-    <a href="0011-parabolas.html">← Lesson 11: Parabolas</a>
+    <a href="0013-parabola-lift.html">← Lesson 13: Up &amp; Down</a>
     <a href="../index.html">🏠 Course map</a>
-    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a>
+    <a href="0015-final-exam.html">Lesson 15: Grand Finale Exam →</a>
   </div>
   <p class="footer-links">Quick reference:
     <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
@@ -133,27 +133,33 @@ bS = Graph.slider('playSliders', { label: 'b (base)', min: 0.5, max: 4, step: 0.
   color: '#ec4899', fmt: v => Quiz.fmtNum(v), onInput: redraw });
 redraw();
 
-/* ---------- drill 1: evaluate ---------- */
+/* ---------- drill 1: complete the table of values ---------- */
 Quiz.create('drill1', {
-  title: 'Drill 1 · Powers of the base 🔢',
-  intro: 'Work out the value. Remember: the little number up top is how many times you multiply the base by itself.',
+  title: 'Drill 1 · Complete the table 🔢',
+  intro: 'This is how you’d plot an exponential: table first. Each step right multiplies by the base. Fill the missing box.',
   rounds: 8,
   generate() {
-    const b = Quiz.pick([2, 3, 5, 10]);
-    const maxX = b === 2 ? 7 : b === 3 ? 4 : b === 5 ? 3 : 2;
-    const x = Quiz.ri(0, maxX);
-    const y = Math.pow(b, x);
+    const b = Quiz.pick([2, 3, 10]);
+    const xs = [0, 1, 2, 3];
+    const ys = xs.map(x => Math.pow(b, x));
+    const hide = Quiz.ri(0, xs.length - 1);
+    const y = ys[hide];
+    const row = cells => cells.map(c => `<td>${c}</td>`).join('');
     return {
-      prompt: `What is <span class="eq">${b}<sup>${x}</sup></span>?${x === 0 ? ' <em>(careful — this one’s a trap!)</em>' : ''}`,
+      prompt: `Complete the table for <span class="eq">y = ${b}<sup>x</sup></span>:` +
+        `<table class="vals" style="margin:10px 0">` +
+        `<tr><th>x</th>${row(xs)}</tr>` +
+        `<tr><th>y</th>${row(ys.map((v, i) => i === hide ? '<strong style="color:#ec4899">?</strong>' : v))}</tr>` +
+        `</table>What number goes in the <strong style="color:#ec4899">?</strong> box (x = ${xs[hide]})?`,
       input: {
         keypad: 'num',
         placeholder: '?',
         check: s => Number(String(s).replace(/[−–—]/g, '-').trim()) === y,
         answer: String(y),
       },
-      explain: x === 0
-        ? `Any number to the power 0 is <strong>1</strong> — that’s why every exponential crosses the y-axis at (0, 1).`
-        : `${b}<sup>${x}</sup> means ${Array(x).fill(b).join(' × ')} = <strong>${y}</strong>.`,
+      explain: xs[hide] === 0
+        ? `Anything to the power 0 is <strong>1</strong> — every exponential starts the table at (0, 1).`
+        : `${b}<sup>${xs[hide]}</sup> = ${Array(xs[hide]).fill(b).join(' × ')} = <strong>${y}</strong>.`,
     };
   },
 });

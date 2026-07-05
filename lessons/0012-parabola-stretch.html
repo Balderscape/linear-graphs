@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 12 · Stretch &amp; Flip: y = ax²</title>
+<link rel="stylesheet" href="../assets/course.css?v=4">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Amelia’s Graphs Adventure · Part 2: Curves · Lesson 3 of 6</p>
+    <h1>Stretch &amp; Flip: y&nbsp;=&nbsp;ax² 🤸</h1>
+    <p>You’ve got the basic U. Now put a number in front of the x² and watch it squash, stretch,
+    and flip upside-down.</p>
+  </div>
+
+  <div class="card goal">
+    <h2>🎯 In this lesson</h2>
+    <p>One new number: <strong class="m-color">a</strong>. You’ll learn how it makes the parabola
+    <em>skinny, fat, or flipped</em> — and nothing else moves. (Next lesson we’ll add the up/down number.)</p>
+  </div>
+
+  <div class="card">
+    <h2>What a does</h2>
+    <p>Start from <span class="eq">y = x²</span> and multiply the result by
+    <strong class="m-color">a</strong>: that’s <span class="eq">y = <span class="m-color">a</span>x²</span>.
+    A quick way to feel it — at <span class="eq">x = 1</span>, <span class="eq">y = a</span>. So
+    <strong class="m-color">a</strong> is literally how high the curve is one step across:</p>
+    <ul>
+      <li><strong class="m-color">a</strong> bigger than 1 (like 2 or 3) → tall &amp; <strong>skinny</strong>
+      (steeper).</li>
+      <li><strong class="m-color">a</strong> between 0 and 1 (like ½) → short &amp; <strong>fat</strong>
+      (wider).</li>
+      <li><strong class="m-color">a</strong> <strong>negative</strong> → the whole U <strong>flips</strong>
+      into a ∩ (a frown 🙁). It now opens downward.</li>
+    </ul>
+    <p>The vertex stays put at <span class="eq">(0, 0)</span> — <strong class="m-color">a</strong> only
+    bends the arms, it doesn’t move the curve.</p>
+  </div>
+
+  <div class="card">
+    <h2>🕹️ The stretch machine</h2>
+    <p>The faint dashed curve is plain <span class="eq">y = x²</span>, for comparison. Drag
+    <strong class="m-color">a</strong> and watch the solid one bend away from it.</p>
+    <div id="playSliders"></div>
+    <p class="eq-big" id="playEq"></p>
+    <div id="playGraph"></div>
+    <div class="tip"><strong>Missions:</strong>
+      <ol style="margin:6px 0 0">
+        <li>Make the <strong>skinniest</strong> U you can, then the <strong>fattest</strong>.</li>
+        <li>Flip it into a <strong>frown</strong>. What sign is <strong class="m-color">a</strong> now?</li>
+        <li>Set it so the curve sits <em>right on top</em> of the dashed one. What’s
+        <strong class="m-color">a</strong>?</li>
+        <li>Make a frown that’s <strong>twice as steep</strong> as the dashed U.</li>
+      </ol>
+    </div>
+    <div class="win">💚 <strong>Easy win:</strong> size of <strong class="m-color">a</strong> = skinny (big)
+    or fat (small); sign of <strong class="m-color">a</strong> = smile (+) or frown (−).</div>
+  </div>
+
+  <div class="card">
+    <h2>Lock it in 🔒</h2>
+    <p>Two drills. Fresh questions every replay — chase the 🌟🌟🌟.</p>
+  </div>
+
+  <div id="drill1"></div>
+  <div id="drill2"></div>
+
+  <div class="card">
+    <h2>📚 Want more?</h2>
+    <p>On <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>, type
+    <code>y = a x^2</code>, add a slider for <code>a</code>, and drag it through positive, fraction,
+    and negative values.</p>
+    <p>💬 <strong>Stuck or curious?</strong> Ask Claude — “why does a bigger a make it skinnier?” is a good one.</p>
+  </div>
+
+  <div class="lesson-nav">
+    <a href="0011-meet-the-parabola.html">← Lesson 11: Meet the Parabola</a>
+    <a href="../index.html">🏠 Course map</a>
+    <a href="0013-parabola-lift.html">Lesson 13: Up &amp; Down →</a>
+  </div>
+  <p class="footer-links">Quick reference:
+    <a href="../reference/cheat-sheet.html">📄 Cheat sheet</a> ·
+    <a href="../reference/glossary.html">📖 Glossary</a></p>
+
+</div>
+
+<script src="../assets/graph.js?v=4"></script>
+<script src="../assets/quiz.js?v=4"></script>
+<script>
+const PURPLE = '#7c3aed', TEAL = '#0d9488', GHOST = '#c4b5fd';
+function aTxt(a) { return a === 1 ? '' : a === -1 ? '−' : Quiz.fmtNum(a).replace('-', '−'); }
+const quadA = a => `y = ${aTxt(a)}x²`;
+
+/* ---------- playground ---------- */
+const g = Graph.create('playGraph', { xmin: -4, xmax: 4, ymin: -10, ymax: 10, width: 420, height: 420, labelEvery: 2 });
+const eqEl = document.getElementById('playEq');
+let aS;
+function redraw() {
+  g.clear();
+  const a = aS.value;
+  g.curve(x => x * x, { color: GHOST, width: 2, dash: true });     // reference y = x²
+  if (a === 0) { g.hline(0, { color: PURPLE, width: 4 }); eqEl.innerHTML = 'y = 0 (flat!)'; return; }
+  g.curve(x => a * x * x, { color: PURPLE, width: 4 });
+  g.point(0, 0, { color: TEAL });
+  eqEl.innerHTML = `y = <span class="m-color">${aTxt(a)}x²</span>`;
+}
+aS = Graph.slider('playSliders', { label: 'a (stretch)', min: -3, max: 3, step: 0.5, value: 2,
+  color: '#ec4899', fmt: v => Quiz.fmtNum(v), onInput: redraw });
+redraw();
+
+/* ---------- drill 1: match the parabola to its equation (a only) ---------- */
+Quiz.create('drill1', {
+  title: 'Drill 1 · Skinny, fat, or flipped? 👀',
+  intro: 'Smile or frown tells you the sign; how skinny tells you the size.',
+  rounds: 8,
+  generate() {
+    const a = Quiz.pick([0.5, 1, 2, 3, -0.5, -1, -2, -3]);
+    const right = quadA(a);
+    const distract = new Set();
+    for (const d of [-a, a > 0 ? a + 1 : a - 1, a / 2 === Math.round(a / 2) || Math.abs(a) !== 1 ? -a * 2 : -a, a > 0 ? 0.5 : -0.5]) {
+      const s = quadA(d);
+      if (d !== 0 && s !== right) distract.add(s);
+      if (distract.size === 3) break;
+    }
+    return {
+      prompt(el) {
+        el.innerHTML = 'Which equation matches this parabola?';
+        const gg = Graph.create(el, { xmin: -4, xmax: 4, ymin: -10, ymax: 10, width: 300, height: 300 });
+        gg.curve(x => x * x, { color: GHOST, width: 1.5, dash: true });
+        gg.curve(x => a * x * x, { color: PURPLE, width: 3.5 });
+      },
+      choices: [{ html: `<span class="eq">${right}</span>`, correct: true },
+        ...[...distract].map(d => ({ html: `<span class="eq">${d}</span>` }))],
+      explain: `It’s a ${a > 0 ? 'smile (a positive)' : 'frown (a negative)'} and it’s ` +
+        `${Math.abs(a) > 1 ? 'skinnier' : Math.abs(a) < 1 ? 'fatter' : 'the same width as'} the dashed y = x², ` +
+        `so a = ${Quiz.fmtNum(a).replace('-', '−')}. (Check: at x = 1, y = ${Quiz.fmtNum(a).replace('-', '−')}.)`,
+    };
+  },
+});
+
+/* ---------- drill 2: write the equation (a only) ---------- */
+Quiz.create('drill2', {
+  title: 'Drill 2 · Name that parabola ✍️',
+  intro: 'Read the shape and type the equation with the x² key. The y = is already there.',
+  rounds: 8,
+  generate() {
+    const a = Quiz.pick([1, 2, 3, -1, -2, -3]);
+    return {
+      prompt(el) {
+        el.innerHTML = 'What’s the equation of this parabola?';
+        const gg = Graph.create(el, { xmin: -4, xmax: 4, ymin: -10, ymax: 10, width: 300, height: 300 });
+        gg.curve(x => x * x, { color: GHOST, width: 1.5, dash: true });
+        gg.curve(x => a * x * x, { color: PURPLE, width: 3.5 });
+      },
+      input: { keypad: 'quad', placeholder: '…', check: s => Quiz.checkQuad(s, { a, k: 0 }), answer: quadA(a) },
+      explain: `Vertex still at (0, 0), so there’s no + or − number. At x = 1 it reaches ` +
+        `${Quiz.fmtNum(a).replace('-', '−')}, so a = ${Quiz.fmtNum(a).replace('-', '−')} → ${quadA(a)}.`,
+    };
+  },
+});
+</script>
+</body>
+</html>
