@@ -188,6 +188,43 @@ table.vals td { background: #fff; }
   padding: 10px 14px; border: 2px solid #e5daff; border-radius: 12px;
 }
 .quiz-input-row input:focus { outline: none; border-color: var(--purple); }
+
+/* Answer field + on-screen keypad (phone-friendly equation entry) */
+.quiz-field {
+  display: flex; align-items: center; gap: 8px;
+  margin: 12px 0; padding: 10px 14px;
+  border: 2px solid #e5daff; border-radius: 12px; background: #fff;
+}
+.quiz-field:focus-within { border-color: var(--purple); }
+.quiz-prefix {
+  font-family: "Menlo", "Consolas", monospace; font-size: 1.35rem;
+  font-weight: 700; color: var(--purple); user-select: none; white-space: nowrap;
+}
+.quiz-field input.quiz-answer {
+  flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+  font-family: "Menlo", "Consolas", monospace; font-size: 1.35rem; color: var(--ink);
+  padding: 2px 0;
+}
+.quiz-keypad { display: flex; flex-direction: column; gap: 8px; max-width: 340px; margin: 0 0 12px; }
+.quiz-keypad .krow { display: flex; gap: 8px; }
+.quiz-key {
+  flex: 1 1 0; min-height: 54px; padding: 0;
+  font-family: "Menlo", "Consolas", monospace; font-size: 1.4rem; font-weight: 700;
+  color: var(--ink); background: #fff; border: 2px solid #e5daff; border-radius: 12px;
+  cursor: pointer; touch-action: manipulation; user-select: none;
+  transition: transform .05s, background .12s;
+}
+.quiz-key:hover:not(:disabled) { border-color: var(--purple); }
+.quiz-key:active:not(:disabled) { transform: translateY(2px); background: #f3eefe; }
+.quiz-key:disabled { opacity: .45; cursor: default; }
+.quiz-key.act { background: #f6f2ff; color: var(--purple); font-size: 1.2rem; }
+.quiz-key.wide { flex: 2 1 0; }
+.quiz-key.never { font-size: 1.05rem; letter-spacing: .3px; }
+.quiz-key.go {
+  color: #fff; border: none; min-height: 50px; font-size: 1.2rem; letter-spacing: .3px;
+  background: linear-gradient(120deg, var(--purple), var(--pink));
+}
+.quiz-key.go:hover:not(:disabled) { filter: brightness(1.06); border-color: transparent; }
 .quiz-feedback { border-radius: 12px; padding: 12px 16px; margin: 12px 0; font-weight: 600; display: none; }
 .quiz-feedback.good { display: block; background: #f0fdf4; border: 2px solid var(--green); color: #14532d; }
 .quiz-feedback.bad { display: block; background: #fef2f2; border: 2px solid var(--red); color: #7f1d1d; }

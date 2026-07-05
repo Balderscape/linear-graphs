@@ -131,6 +131,84 @@ const Quiz = (() => {
   const NUDGE = ['Not quite — look below.', 'So close! Here’s the trick.',
     'Good try — check this out.', 'Almost! Have a look.'];
 
+  /* ---------- on-screen keypad (phone-friendly answer entry) ----------
+     A big-button pad so equations can be entered without the fiddly phone
+     keyboard. The layout is picked automatically from the question's
+     placeholder, so lessons need no changes:
+       'y = …'                → line pad, with a locked "y =" prefix
+       'y = …  or  x = …'     → adds y / x / = keys, no forced prefix
+       '(x, y)' / '… never'   → coordinate pad ( ( , ) and a "never" key )
+     A question may override with input.keypad ('line'|'linevar'|'coord')
+     and/or input.prefix (a locked, un-typed string like 'y = ').           */
+  const KEYPADS = {
+    line: [
+      ['7', '8', '9', { t: 'x', v: 'x' }],
+      ['4', '5', '6', { t: '∕', v: '/' }],
+      ['1', '2', '3', { t: '−', v: '-' }],
+      [{ t: '.', v: '.' }, '0', { t: '+', v: '+' }, { t: '⌫', act: 'back' }],
+    ],
+    linevar: [
+      [{ t: 'y', v: 'y' }, { t: 'x', v: 'x' }, { t: '=', v: '=' }, { t: '⌫', act: 'back' }],
+      ['7', '8', '9', { t: '∕', v: '/' }],
+      ['4', '5', '6', { t: '−', v: '-' }],
+      ['1', '2', '3', { t: '+', v: '+' }],
+      [{ t: '.', v: '.' }, '0'],
+    ],
+    coord: [
+      [{ t: '(', v: '(' }, { t: ',', v: ', ' }, { t: ')', v: ')' }],
+      ['7', '8', '9', { t: '−', v: '-' }],
+      ['4', '5', '6', { t: '⌫', act: 'back' }],
+      ['1', '2', '3', '0'],
+    ],
+  };
+
+  const normKey = k => (typeof k === 'string' ? { t: k, v: k } : k);
+
+  function keypadMode(input) {
+    if (input.keypad) return input.keypad;
+    const p = String(input.placeholder || '').toLowerCase();
+    if (p.includes('(')) return 'coord';
+    if (p.includes('x =') || p.includes('x=')) return 'linevar';
+    if (/^\s*y\s*=/.test(p)) return 'line';
+    return 'linevar';
+  }
+
+  function keypadPrefix(input, mode) {
+    if (input.prefix != null) return input.prefix;
+    return mode === 'line' ? 'y = ' : '';
+  }
+
+  function keypadRows(mode, input) {
+    const rows = (KEYPADS[mode] || KEYPADS.linevar).map(r => r.slice());
+    if (mode === 'coord' && /never/i.test(String(input.placeholder || ''))) {
+      rows.push([{ t: 'never', act: 'never', wide: true }]);
+    }
+    return rows;
+  }
+
+  function insertAtCaret(inp, text) {
+    const len = inp.value.length;
+    let s = inp.selectionStart, e = inp.selectionEnd;
+    if (s == null) { s = len; e = len; }
+    inp.value = inp.value.slice(0, s) + text + inp.value.slice(e);
+    const pos = s + text.length;
+    try { inp.setSelectionRange(pos, pos); } catch (_) {}
+  }
+
+  function backspace(inp) {
+    const len = inp.value.length;
+    let s = inp.selectionStart, e = inp.selectionEnd;
+    if (s == null) { s = len; e = len; }
+    if (s === e) {
+      if (s === 0) return;
+      inp.value = inp.value.slice(0, s - 1) + inp.value.slice(e);
+      s -= 1;
+    } else {
+      inp.value = inp.value.slice(0, s) + inp.value.slice(e);
+    }
+    try { inp.setSelectionRange(s, s); } catch (_) {}
+  }
+
   /* ---------- drill engine ----------
      Quiz.create(target, {
        title: 'Drill: …',
@@ -218,22 +296,77 @@ const Quiz = (() => {
           wrap.appendChild(b);
         });
       } else if (q.input) {
-        const row = document.createElement('div');
-        row.className = 'quiz-input-row';
+        const mode = keypadMode(q.input);
+        const prefix = keypadPrefix(q.input, mode);
+
+        // Answer field: an optional locked prefix (e.g. "y =") + the typed part.
+        const field = document.createElement('div');
+        field.className = 'quiz-field';
+        if (prefix) {
+          const pf = document.createElement('span');
+          pf.className = 'quiz-prefix';
+          pf.textContent = prefix.trim();
+          field.appendChild(pf);
+        }
         const inp = document.createElement('input');
-        inp.placeholder = q.input.placeholder || 'your answer…';
+        inp.className = 'quiz-answer';
+        inp.placeholder = prefix ? '…' : (q.input.placeholder || 'your answer…');
+        // inputmode="none" keeps the caret but suppresses the phone's OS
+        // keyboard so the big on-screen pad below is the way to type.
+        inp.inputMode = 'none';
         inp.autocapitalize = 'off'; inp.autocomplete = 'off'; inp.spellcheck = false;
-        const btn = document.createElement('button');
-        btn.className = 'btn'; btn.textContent = 'Check ✓';
-        row.append(inp, btn);
-        bodyEl.appendChild(row);
+        field.appendChild(inp);
+        bodyEl.appendChild(field);
+
         const submit = () => {
           if (btn.disabled || !inp.value.trim()) return;
           btn.disabled = true; inp.disabled = true;
-          if (q.input.check(inp.value)) good(q);
+          keypad.querySelectorAll('.quiz-key').forEach(k => k.disabled = true);
+          let val = inp.value;
+          if (prefix && !/^\s*y\s*=/i.test(val)) val = prefix + val;
+          if (q.input.check(val)) good(q);
           else bad(q, q.input.answer);
         };
-        btn.addEventListener('click', submit);
+
+        // Big-button keypad.
+        const keypad = document.createElement('div');
+        keypad.className = 'quiz-keypad';
+        keypadRows(mode, q.input).forEach(r => {
+          const rowEl = document.createElement('div');
+          rowEl.className = 'krow';
+          r.forEach(raw => {
+            const k = normKey(raw);
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'quiz-key' + (k.act ? ' act' : '') +
+              (k.wide ? ' wide' : '') + (k.act === 'never' ? ' never' : '');
+            b.textContent = k.t;
+            // pointerdown + preventDefault keeps focus on the field so the
+            // caret stays put and never triggers the OS keyboard.
+            b.addEventListener('pointerdown', e => {
+              e.preventDefault();
+              if (b.disabled) return;
+              if (k.act === 'back') backspace(inp);
+              else if (k.act === 'never') { inp.value = 'never'; try { inp.setSelectionRange(5, 5); } catch (_) {} }
+              else insertAtCaret(inp, k.v);
+              inp.focus();
+            });
+            rowEl.appendChild(b);
+          });
+          keypad.appendChild(rowEl);
+        });
+        // Full-width Check button as the last row.
+        const goRow = document.createElement('div');
+        goRow.className = 'krow';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'quiz-key go wide';
+        btn.textContent = 'Check ✓';
+        btn.addEventListener('pointerdown', e => { e.preventDefault(); submit(); });
+        goRow.appendChild(btn);
+        keypad.appendChild(goRow);
+        bodyEl.appendChild(keypad);
+
         inp.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
         inp.focus();
       }
@@ -290,5 +423,6 @@ const Quiz = (() => {
     return { restart: start };
   }
 
-  return { create, parseLine, checkLine, fmtLine, fmtNum, ri, rnz, pick, shuffle, approx, confetti };
+  return { create, parseLine, checkLine, fmtLine, fmtNum, ri, rnz, pick, shuffle, approx, confetti,
+    keypadMode, keypadPrefix, keypadRows };
 })();

@@ -67,6 +67,21 @@ A `question` is one of:
   explain: '…' }
 ```
 
+**Typed answers use a built-in on-screen keypad** (big buttons, no fiddly phone
+keyboard — `inputmode="none"` suppresses the OS one). The layout is chosen
+automatically from the `placeholder`, so you don't configure anything:
+
+| placeholder contains… | pad | locked prefix |
+|---|---|---|
+| `y = …` | digits, `x - + / .` | **`y = `** (she types only the right-hand side) |
+| `x = …` (e.g. `y = … or x = …`) | adds `y` `x` `=` keys | none |
+| `(` (e.g. `(x, y)`, `(x, y) or never`) | `( , )` + digits + `−`; a `never` key appears only if the word "never" is in the placeholder | none |
+
+`check` still receives the **full** string (the `y = ` prefix is prepended for
+you), so existing `Quiz.checkLine(s, {m, c})` checks are unchanged. Override the
+auto choice per-question with `input.keypad: 'line' | 'linevar' | 'coord'` and/or
+`input.prefix: 'y = '` (a locked, un-typed string).
+
 `prompt` may be an html string **or** a function receiving the prompt element
 (use the function form to embed a Graph in the question).
 
